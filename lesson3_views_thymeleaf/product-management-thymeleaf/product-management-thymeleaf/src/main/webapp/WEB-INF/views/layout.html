@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title>Spring Product</title>
+  <style>
+    h3 { background-color: blue; color: white; padding: 10px 20px; }
+    footer { margin: 20px 0; }
+    #products { width: 100%; border-collapse: collapse; }
+    #products th, #products td { border: 1px solid #ccc; padding: 8px; }
+    #products th { background: #4CAF50; color: white; }
+    input, textarea {
+      width: 100%; padding: 8px; margin: 6px 0;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    input[type=submit] {
+      width: 200px; background: #4CAF50; color: white;
+      border: none; padding: 10px; cursor: pointer;
+    }
+    input[type=submit]:hover { background: #45a049; }
+    .notify div { background: #dff0d8; padding: 10px; color: #3c763d; border: 1px solid #3c763d; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<footer th:fragment="footer">
+  &copy; 2025 Product Management
+</footer>
+</body>
+</html>
