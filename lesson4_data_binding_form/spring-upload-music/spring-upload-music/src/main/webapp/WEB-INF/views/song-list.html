@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Song List</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding-top: 2rem; margin: 0; background-color: #f0f2f5; }
+    .container { background: #fff; padding: 2rem 3rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); width: 100%; max-width: 900px; }
+    h1 { font-size: 2rem; margin-bottom: 2rem; text-align: center; color: #1c1e21; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #dddfe2; }
+    th { font-weight: 600; color: #606770; }
+    a { color: #1877f2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .alert { padding: 1rem; margin-bottom: 1.5rem; border-radius: 6px; }
+    .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+    .actions { margin-top: 2rem; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Danh sách bài hát</h1>
+
+  <!-- Hiển thị thông báo thành công nếu có -->
+  <div th:if="${successMessage}" class="alert alert-success" th:text="${successMessage}"></div>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Tên bài hát</th>
+      <th>Nghệ sĩ</th>
+      <th>Thể loại</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${#lists.isEmpty(songs)}">
+      <td colspan="3" style="text-align: center;">Chưa có bài hát nào được upload.</td>
+    </tr>
+    <tr th:each="song : ${songs}">
+      <td th:text="${song.name}">Tên bài hát</td>
+      <td th:text="${song.artist}">Nghệ sĩ</td>
+      <td th:text="${song.genre}">Thể loại</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="actions">
+    <a href="/upload" th:href="@{/upload}">Upload bài hát mới</a>
+  </div>
+</div>
+</body>
+</html>

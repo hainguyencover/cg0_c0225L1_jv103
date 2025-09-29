@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Settings (Spring)</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f2f5;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #1c1e21;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      align-items: center;
+      gap: 1rem;
+    }
+    label, .label {
+      font-weight: 600;
+      color: #606770;
+    }
+    select, textarea, input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    select:focus, textarea:focus {
+      outline: none;
+      border-color: #1877f2;
+      box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .checkbox-group {
+      grid-template-columns: 120px auto 1fr;
+    }
+    input[type="checkbox"] {
+      width: auto;
+      margin-right: 0.5rem;
+    }
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    button {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary {
+      background-color: #1877f2;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: #166fe5;
+    }
+    .btn-secondary {
+      background-color: #e4e6eb;
+      color: #4b4f56;
+    }
+    .btn-secondary:hover {
+      background-color: #d8dade;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Settings</h1>
+  <!-- th:action="@{/settings}" chỉ định action của form -->
+  <!-- th:object="${settings}" liên kết form với đối tượng 'settings' từ model -->
+  <form th:action="@{/settings}" th:object="${settings}" method="post">
+    <div class="form-group">
+      <label for="language">Languages</label>
+      <!-- th:field="*{language}" liên kết select box với thuộc tính 'language' -->
+      <select id="language" th:field="*{language}">
+        <!-- th:each để lặp qua danh sách languages -->
+        <!-- th:value để set giá trị cho option -->
+        <!-- th:text để hiển thị text cho option -->
+        <option th:each="lang : ${languages}" th:value="${lang}" th:text="${lang}"></option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="pageSize">Page Size:</label>
+      <select id="pageSize" th:field="*{pageSize}">
+        <option th:each="size : ${pageSizes}"
+                th:value="${size}"
+                th:text="|Show ${size} emails per page|"></option>
+      </select>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <span class="label">Spam filter:</span>
+      <!-- th:field="*{spamFilter}" liên kết checkbox với thuộc tính boolean 'spamFilter' -->
+      <input type="checkbox" id="spamFilter" th:field="*{spamFilter}">
+      <label for="spamFilter">Enable spam filter</label>
+    </div>
+
+    <div class="form-group">
+      <label for="signature">Signature:</label>
+      <!-- th:field="*{signature}" liên kết textarea với thuộc tính 'signature' -->
+      <textarea id="signature" rows="4" th:field="*{signature}"></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-secondary" th:onclick="|window.location.href='@{/settings}'|">Cancel</button>
+      <button type="submit" class="btn-primary">Update</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
