@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm bài hát</title>
+</head>
+<body>
+<h2>➕ Thêm bài hát mới</h2>
+
+<form th:action="@{/songs/create}" method="post" enctype="multipart/form-data" th:object="${song}">
+    <p>
+        <label>Tiêu đề:</label><br>
+        <input type="text" th:field="*{title}" required>
+    </p>
+
+    <p>
+        <label>Nghệ sĩ:</label><br>
+        <input type="text" th:field="*{artist}" required>
+    </p>
+
+    <p>
+        <label>Thể loại:</label><br>
+        <input type="text" th:field="*{genre}">
+    </p>
+
+    <p>
+        <label>File nhạc (.mp3):</label><br>
+        <input type="file" name="file" accept="audio/mp3,audio/*" required>
+    </p>
+
+    <p>
+        <button type="submit">💾 Lưu</button>
+        <a th:href="@{/songs}">⬅ Quay lại</a>
+    </p>
+</form>
+
+</body>
+</html>

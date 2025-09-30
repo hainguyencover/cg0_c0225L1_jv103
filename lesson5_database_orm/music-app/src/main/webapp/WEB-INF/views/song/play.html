@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Nghe nhạc</title>
+</head>
+<body>
+<h2 th:text="'🎵 Đang phát: ' + ${song.title}"></h2>
+<p><b>Nghệ sĩ:</b> <span th:text="${song.artist}"></span></p>
+<p><b>Thể loại:</b> <span th:text="${song.genre}"></span></p>
+
+<audio controls style="width: 400px;">
+    <source th:src="@{${song.filePath}}" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ phát nhạc.
+</audio>
+
+<br><br>
+<a th:href="@{/songs}">⬅ Quay lại danh sách</a>
+</body>
+</html>

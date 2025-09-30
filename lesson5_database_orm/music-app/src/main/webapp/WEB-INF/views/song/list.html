@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách bài hát</title>
+</head>
+<body>
+<h2>🎶 Danh sách bài hát</h2>
+
+<p><a th:href="@{/songs/create}">➕ Thêm bài hát mới</a></p>
+
+<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
+    <thead>
+    <tr>
+        <th>Tiêu đề</th>
+        <th>Nghệ sĩ</th>
+        <th>Thể loại</th>
+        <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song : ${songs}">
+        <td th:text="${song.title}">Tiêu đề</td>
+        <td th:text="${song.artist}">Nghệ sĩ</td>
+        <td th:text="${song.genre}">Thể loại</td>
+        <td>
+            <a th:href="@{/songs/play/{id}(id=${song.id})}">▶ Nghe</a> |
+            <a th:href="@{/songs/edit/{id}(id=${song.id})}">✏ Sửa</a> |
+            <a th:href="@{/songs/delete/{id}(id=${song.id})}"
+               onclick="return confirm('Bạn có chắc muốn xóa không?')">🗑 Xóa</a>
+        </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(songs)}">
+        <td colspan="4" style="text-align: center;">Không có bài hát nào</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
