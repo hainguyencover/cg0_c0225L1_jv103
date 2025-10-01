@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>NASA APOD Feedback</title>
+  <meta charset="UTF-8"/>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    img { max-width: 600px; margin-bottom: 20px; }
+    .feedback-form, .feedback-list { margin-top: 30px; }
+    .feedback-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+    .feedback-item span { font-weight: bold; }
+    button { margin-left: 10px; }
+  </style>
+</head>
+<body>
+<h2>Bức ảnh của ngày</h2>
+<img id="img-of-the-day" alt="NASA Astronomy Picture of the Day"/>
+
+<script>
+  let query = 'https://api.nasa.gov/planetary/apod?api_key=BDB3aWIeXJJrA9bWhsH1MXBxYsCNi1FkiB8bWfpb';
+  let request = new XMLHttpRequest();
+  request.open('GET', query);
+  request.onload = function() {
+    if (request.status === 200) {
+      let response = JSON.parse(request.responseText);
+      document.getElementById('img-of-the-day').setAttribute('src', response.url);
+    }
+  };
+  request.send();
+</script>
+
+<!-- Form Feedback -->
+<div class="feedback-form">
+  <h3>Đánh giá hôm nay</h3>
+  <form th:action="@{/save}" th:object="${feedback}" method="post">
+    <label>Tác giả:</label>
+    <input type="text" th:field="*{author}" required/><br/><br/>
+
+    <label>Bình luận:</label><br/>
+    <textarea th:field="*{comment}" rows="4" cols="50" required></textarea><br/><br/>
+
+    <label>Điểm (1-5):</label>
+    <input type="number" min="1" max="5" th:field="*{rating}" required/><br/><br/>
+
+    <button type="submit">Gửi</button>
+  </form>
+</div>
+
+<!-- Danh sách feedback -->
+<div class="feedback-list">
+  <h3>Danh sách Feedback hôm nay</h3>
+  <div th:if="${#lists.isEmpty(list)}">
+    <i>Chưa có feedback nào hôm nay.</i>
+  </div>
+  <div th:each="fb : ${list}" class="feedback-item">
+    <span th:text="${fb.author}"></span>
+    (<span th:text="${fb.rating}"></span>/5):
+    <span th:text="${fb.comment}"></span> |
+    Likes: <span th:text="${fb.likes}"></span>
+    <a th:href="@{/like/{id}(id=${fb.id})}">
+      <button type="button">Like 👍</button>
+    </a>
+  </div>
+</div>
+</body>
+</html>
