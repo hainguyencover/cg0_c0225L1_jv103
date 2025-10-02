@@ -3,10 +3,7 @@ package com.example.blog.repository;
 import com.example.blog.model.Blog;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +15,19 @@ public class BlogRepository implements IBlogRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+//    @Override
+//    public List<Blog> findAll() {
+//        TypedQuery<Blog> query = entityManager.createQuery("select b from Blog b", Blog.class);
+//        return query.getResultList();
+//    }
+
     @Override
-    public List<Blog> findAll() {
-        TypedQuery<Blog> query = entityManager.createQuery("select b from Blog b", Blog.class);
+    public List<Blog> findAll(int page, int size, String sortField, boolean asc) {
+        String direction = asc ? "ASC" : "DESC";
+        String jpql = "SELECT b FROM Blog b ORDER BY b." + sortField + " " + direction;
+        TypedQuery<Blog> query = entityManager.createQuery(jpql, Blog.class);
+        query.setFirstResult(page * size); // offset
+        query.setMaxResults(size);        // limit
         return query.getResultList();
     }
 
@@ -50,5 +57,21 @@ public class BlogRepository implements IBlogRepository {
         if (blog != null) {
             entityManager.remove(blog);
         }
+    }
+
+    @Override
+    public long count() {
+        Query query = entityManager.createQuery("SELECT COUNT(b) FROM Blog b");
+        return (Long) query.getSingleResult();
+    }
+
+    @Override
+    public List<Blog> searchByTitle(String keyword, int page, int size) {
+        String jpql = "SELECT b FROM Blog b WHERE LOWER(b.title) LIKE LOWER(:keyword)";
+        TypedQuery<Blog> query = entityManager.createQuery(jpql, Blog.class);
+        query.setParameter("keyword", "%" + keyword + "%");
+        query.setFirstResult(page * size);
+        query.setMaxResults(size);
+        return query.getResultList();
     }
 }

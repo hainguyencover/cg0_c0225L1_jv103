@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="~{layout}" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>500 - Lỗi hệ thống</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container text-center mt-5">
+        <h1 class="display-3 text-danger">500</h1>
+        <h2>Ôi! Có lỗi xảy ra trên server.</h2>
+        <p class="text-muted">Xin lỗi vì sự bất tiện này, vui lòng thử lại sau.</p>
+        <a th:href="@{/}" class="btn btn-primary mt-3">Về Trang chủ</a>
+    </div>
+</section>
+</body>
+</html>
