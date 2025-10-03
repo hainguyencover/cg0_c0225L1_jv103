@@ -1,40 +1,370 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="vi">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Danh sách bài hát</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>🎶 Danh sách bài hát</h2>-->
+
+<!--<p><a th:href="@{/songs/create}">➕ Thêm bài hát mới</a></p>-->
+
+<!--<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>Tiêu đề</th>-->
+<!--        <th>Nghệ sĩ</th>-->
+<!--        <th>Thể loại</th>-->
+<!--        <th>Hành động</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr th:each="song : ${songs}">-->
+<!--        <td th:text="${song.title}">Tiêu đề</td>-->
+<!--        <td th:text="${song.artist}">Nghệ sĩ</td>-->
+<!--        <td th:text="${song.genre}">Thể loại</td>-->
+<!--        <td>-->
+<!--            <a th:href="@{/songs/play/{id}(id=${song.id})}">▶ Nghe</a> |-->
+<!--            <a th:href="@{/songs/edit/{id}(id=${song.id})}">✏ Sửa</a> |-->
+<!--            <a th:href="@{/songs/delete/{id}(id=${song.id})}"-->
+<!--               onclick="return confirm('Bạn có chắc muốn xóa không?')">🗑 Xóa</a>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    <tr th:if="${#lists.isEmpty(songs)}">-->
+<!--        <td colspan="4" style="text-align: center;">Không có bài hát nào</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Danh sách bài hát</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Bài Hát</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .header-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            padding: 10px 15px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 14px;
+            min-width: 250px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-small {
+            padding: 5px 12px;
+            font-size: 12px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #10b981;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #ef4444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: #667eea;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a {
+            display: inline-block;
+            padding: 6px 12px;
+            margin: 0 3px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .pagination a.active {
+            background-color: #667eea;
+            color: #fff;
+            border-color: #667eea;
+        }
+
+        .pagination a:hover {
+            background-color: #f3f4f6;
+        }
+
+    </style>
 </head>
 <body>
-<h2>🎶 Danh sách bài hát</h2>
+<!--<div class="container">-->
+<!--    <h1>🎵 Thư Viện Nhạc Của Tôi</h1>-->
 
-<p><a th:href="@{/songs/create}">➕ Thêm bài hát mới</a></p>
+<!--    &lt;!&ndash; Thông báo &ndash;&gt;-->
+<!--    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>-->
+<!--    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>-->
 
-<table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse;">
-    <thead>
-    <tr>
-        <th>Tiêu đề</th>
-        <th>Nghệ sĩ</th>
-        <th>Thể loại</th>
-        <th>Hành động</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="song : ${songs}">
-        <td th:text="${song.title}">Tiêu đề</td>
-        <td th:text="${song.artist}">Nghệ sĩ</td>
-        <td th:text="${song.genre}">Thể loại</td>
-        <td>
-            <a th:href="@{/songs/play/{id}(id=${song.id})}">▶ Nghe</a> |
-            <a th:href="@{/songs/edit/{id}(id=${song.id})}">✏ Sửa</a> |
-            <a th:href="@{/songs/delete/{id}(id=${song.id})}"
-               onclick="return confirm('Bạn có chắc muốn xóa không?')">🗑 Xóa</a>
-        </td>
-    </tr>
-    <tr th:if="${#lists.isEmpty(songs)}">
-        <td colspan="4" style="text-align: center;">Không có bài hát nào</td>
-    </tr>
-    </tbody>
-</table>
+<!--    &lt;!&ndash; Header Actions &ndash;&gt;-->
+<!--    <div class="header-actions">-->
+<!--        <form class="search-box" th:action="@{/songs/search}" method="get">-->
+<!--            <input type="text" name="keyword" placeholder="Tìm kiếm bài hát..."-->
+<!--                   th:value="${keyword}">-->
+<!--            <button type="submit" class="btn btn-primary">Tìm kiếm</button>-->
+<!--        </form>-->
+
+<!--        <a th:href="@{/songs/create}" class="btn btn-success">+ Thêm Bài Hát</a>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Bảng danh sách bài hát &ndash;&gt;-->
+<!--    <div th:if="${songs != null and !songs.isEmpty()}">-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>STT</th>-->
+<!--                <th>Tên Bài Hát</th>-->
+<!--                <th>Nghệ Sĩ</th>-->
+<!--                <th>Thể Loại</th>-->
+<!--                <th>Thao Tác</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="song, iterStat : ${songs}">-->
+<!--                <td th:text="${iterStat.count}">1</td>-->
+<!--                <td th:text="${song.title}">Tên bài hát</td>-->
+<!--                <td th:text="${song.artist}">Nghệ sĩ</td>-->
+<!--                <td th:text="${song.genre}">Thể loại</td>-->
+<!--                <td>-->
+<!--                    <div class="actions">-->
+<!--                        <a th:href="@{/songs/play/{id}(id=${song.id})}"-->
+<!--                           class="btn btn-primary btn-small">▶ Phát</a>-->
+<!--                        <a th:href="@{/songs/edit/{id}(id=${song.id})}"-->
+<!--                           class="btn btn-warning btn-small">✏ Sửa</a>-->
+<!--                        <a th:href="@{/songs/delete/{id}(id=${song.id})}"-->
+<!--                           class="btn btn-danger btn-small"-->
+<!--                           onclick="return confirm('Bạn có chắc muốn xóa bài hát này?')">-->
+<!--                            🗑 Xóa</a>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Trường hợp: search nhưng không tìm thấy &ndash;&gt;-->
+<!--    <div th:if="${isSearch} and ${songs != null and songs.isEmpty()}">-->
+<!--        <p>❌ Không tìm thấy bài hát nào cho từ khóa "<span th:text="${keyword}"></span>"</p>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Trường hợp: chưa có dữ liệu &ndash;&gt;-->
+<!--    <div th:if="${!isSearch} and ${songs != null and songs.isEmpty()}" class="empty-state">-->
+<!--        <h3>📭 Chưa có bài hát nào</h3>-->
+<!--        <p>Hãy thêm bài hát đầu tiên của bạn!</p>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="container">
+    <h1>🎵 Thư Viện Nhạc Của Tôi</h1>
+
+    <!-- Thông báo -->
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+        <form class="search-box" th:action="@{/songs}" method="get">
+            <input type="text" name="keyword" placeholder="Tìm kiếm bài hát..."
+                   th:value="${keyword}">
+            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        </form>
+
+        <a th:href="@{/songs/create}" class="btn btn-success">+ Thêm Bài Hát</a>
+    </div>
+
+    <!-- Có dữ liệu -->
+    <div th:if="${songs != null and !songs.isEmpty()}">
+        <table>
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên Bài Hát</th>
+                <th>Nghệ Sĩ</th>
+                <th>Thể Loại</th>
+                <th>Thao Tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="song, iterStat : ${songs}">
+                <!-- STT tính theo trang -->
+                <td th:text="${(currentPage - 1) * 3 + iterStat.index + 1}"></td>
+                <td th:text="${song.title}">Tên bài hát</td>
+                <td th:text="${song.artist}">Nghệ sĩ</td>
+                <td th:text="${song.genre}">Thể loại</td>
+                <td>
+                    <div class="actions">
+                        <a th:href="@{/songs/play/{id}(id=${song.id})}" class="btn btn-primary btn-small">▶ Phát</a>
+                        <a th:href="@{/songs/edit/{id}(id=${song.id})}" class="btn btn-warning btn-small">✏ Sửa</a>
+                        <a th:href="@{/songs/delete/{id}(id=${song.id})}"
+                           class="btn btn-danger btn-small"
+                           onclick="return confirm('Bạn có chắc muốn xóa bài hát này?')">🗑 Xóa</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Phân trang -->
+        <div class="pagination">
+            <!-- Nút Prev -->
+            <a th:if="${currentPage > 1}"
+               th:href="@{/songs(page=${currentPage - 1}, size=3, keyword=${keyword})}">&laquo; Prev</a>
+
+            <!-- Số trang -->
+            <a th:each="i : ${#numbers.sequence(1, totalPages)}"
+               th:href="@{/songs(page=${i}, size=3, keyword=${keyword})}"
+               th:text="${i}"
+               th:classappend="${i == currentPage} ? 'active' : ''"></a>
+
+            <!-- Nút Next -->
+            <a th:if="${currentPage < totalPages}"
+               th:href="@{/songs(page=${currentPage + 1}, size=3, keyword=${keyword})}">Next &raquo;</a>
+        </div>
+    </div>
+
+    <!-- Trường hợp: search nhưng không tìm thấy -->
+    <div th:if="${keyword != null and keyword != '' and (songs == null or songs.isEmpty())}">
+        <p>❌ Không tìm thấy bài hát nào cho từ khóa "<span th:text="${keyword}"></span>"</p>
+    </div>
+
+    <!-- Trường hợp: chưa có dữ liệu -->
+    <div th:if="${(keyword == null or keyword == '') and (songs == null or songs.isEmpty())}" class="empty-state">
+        <h3>📭 Chưa có bài hát nào</h3>
+        <p>Hãy thêm bài hát đầu tiên của bạn!</p>
+    </div>
+</div>
 
 </body>
 </html>

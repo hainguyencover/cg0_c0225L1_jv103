@@ -44,6 +44,11 @@ dependencies {
     // Upload file
     implementation ('commons-fileupload:commons-fileupload:1.5')
 
+    // MySQL Connector tương thích JDK8
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
+// Spring Data JPA cho Spring 5
+    implementation 'org.springframework.data:spring-data-jpa:2.7.18'
+
     // Servlet + JSP + JSTL (Java EE 8)
     implementation ('javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:1.2.2')
 

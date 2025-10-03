@@ -8,14 +8,25 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "title", nullable = false, length = 200)
     private String title;
+    @Column(name = "artist", nullable = false, length = 200)
     private String artist;
+    @Column(name = "genre", nullable = false, length = 200)
     private String genre;
+    @Column(name = "filePath", nullable = false, length = 200)
     private String filePath;
 
     public Song() {
     }
+
+    public Song(String title, String artist, String genre, String filePath) {
+        this.title = title;
+        this.artist = artist;
+        this.genre = genre;
+        this.filePath = filePath;
+    }
+
 
     public Song(Long id, String title, String artist, String genre, String filePath) {
         this.id = id;

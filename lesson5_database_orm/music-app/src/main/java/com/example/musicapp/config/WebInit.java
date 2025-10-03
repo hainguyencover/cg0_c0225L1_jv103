@@ -25,7 +25,7 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
         MultipartConfigElement multipartConfig =
-                new MultipartConfigElement("uploads/", // thư mục tạm
+                new MultipartConfigElement("/uploads/", // thư mục tạm
                         50 * 1024 * 1024,             // max file size 50MB
                         100 * 1024 * 1024,            // max request size
                         0);                           // file size threshold

@@ -5,48 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be12ba18-6edb-4032-9b6c-de9f0c3f271d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/java/com/example/customermanagement/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/java/com/example/customermanagement/config/WebInit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/java/com/example/customermanagement/controller/CustomerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/java/com/example/customermanagement/model/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/java/com/example/customermanagement/service/HibernateCustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/java/com/example/customermanagement/service/ICustomerService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/resources/hibernate.conf.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/webapp/WEB-INF/views/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/webapp/WEB-INF/views/delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/webapp/WEB-INF/views/layout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/webapp/WEB-INF/views/update.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../customer-management/src/main/webapp/WEB-INF/views/view.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebInit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/SongController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Song.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/FileStorageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/HibernateSongService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/ISongService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/create.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/edit.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/play.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/java/com/example/nasa/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/java/com/example/nasa/config/WebInit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/java/com/example/nasa/controller/FeedBackController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/java/com/example/nasa/model/FeedBack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/java/com/example/nasa/service/HibernateFeedBackService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/java/com/example/nasa/service/IFeedBackService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/resources/applicationties.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../nasa/src/main/webapp/WEB-INF/views/feedback.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/repository/SongRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/SongService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/SongController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/FileStorageService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/HibernateSongService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/HibernateSongService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/ISongService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/ISongService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/create.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/play.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/play.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/controller/BlogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/BlogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/CategoryRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/IGenerateBlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/IGenerateBlogRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/webapp/WEB-INF/views/blog/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/webapp/WEB-INF/views/blog/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/controller/PhoneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/controller/PhoneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/model/Phone.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/model/Phone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/resources/validation-message.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/resources/validation-message.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/webapp/WEB-INF/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/webapp/WEB-INF/views/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/webapp/WEB-INF/views/result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/config/WebInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/config/WebInit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/java/com/example/validateinforuser/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/webapp/WEB-INF/views/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/webapp/WEB-INF/views/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/validate-infor-user/src/main/webapp/WEB-INF/views/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,22 +64,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "hainguyencover"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hainguyencover&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/hainguyencover/cg0_c0225L1_jv103.git",
-    "accountId": "996f929d-7b6b-41e0-bb03-2d1d9d50ca04"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/hainguyencover/cg0_c0225L1_jv103.git&quot;,
+    &quot;accountId&quot;: &quot;996f929d-7b6b-41e0-bb03-2d1d9d50ca04&quot;
   }
-}]]></component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -94,35 +87,37 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="33QAXBpVwWZom6pIbCSmLuKINBW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Gradle.Build music-app.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Tomcat Server.Tomcat 9.0.107.executor": "Run",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/CodeGym/Module4/CGO-C0225L1-JV103",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Gradle.Build music-app.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.107.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/CodeGym/Module4/spring-student-manager-grade&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\CodeGym\Module4\CGO-C0225L1-JV103\lesson5_database_orm\music-app\src\main\resources\static" />
+      <recent name="E:\CodeGym\Module4\CGO-C0225L1-JV103\lesson5_database_orm\music-app\src\main\resources" />
       <recent name="E:\CodeGym\Module4\CGO-C0225L1-JV103\lesson5_database_orm\music-app\src\main\webapp\WEB-INF\views\song" />
     </key>
   </component>
@@ -233,6 +228,8 @@
       <option name="presentableId" value="Default" />
       <updated>1759238961517</updated>
       <workItem from="1759238962463" duration="6840000" />
+      <workItem from="1759459464436" duration="22986000" />
+      <workItem from="1759492118602" duration="4124000" />
     </task>
     <servers />
   </component>
