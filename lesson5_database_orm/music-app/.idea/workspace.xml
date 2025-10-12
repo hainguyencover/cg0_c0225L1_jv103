@@ -5,16 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="be12ba18-6edb-4032-9b6c-de9f0c3f271d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/PersistenceJPAConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/ArtistController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/GenreController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/converter/StringToArtistConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/converter/StringToGenreConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Artist.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Genre.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/repository/ArtistRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/repository/GenreRepository.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/repository/SongRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/SongService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/ArtistServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/FileStorageServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/GenreServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/IArtistService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/IFileStorageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/IGenreService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/SongServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/artist/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/genre/list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/java/com/example/springmvcregistration/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/java/com/example/springmvcregistration/config/WebInit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/java/com/example/springmvcregistration/controller/FormController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/java/com/example/springmvcregistration/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/java/com/example/springmvcregistration/service/IUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/java/com/example/springmvcregistration/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/webapp/WEB-INF/views/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lesson8_validation/springmvc-registration/src/main/webapp/WEB-INF/views/result.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/config/WebInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/controller/SongController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/model/Song.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/FileStorageService.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/HibernateSongService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/HibernateSongService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/ISongService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/musicapp/service/ISongService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
@@ -22,11 +47,13 @@
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/play.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/song/play.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../nasa/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../nasa/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/controller/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/controller/BlogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/BlogRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/CategoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/CategoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/IGenerateBlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/java/com/example/blog/repository/IGenerateBlogRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/webapp/WEB-INF/views/blog/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/blog/src/main/webapp/WEB-INF/views/blog/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lesson6_jpa/nasa/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson6_jpa/nasa/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebInit.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/config/WebInit.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/controller/PhoneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lesson8_validation/customize-phone-validate/src/main/java/com/example/customizephonevalidate/controller/PhoneController.java" afterDir="false" />
@@ -55,8 +82,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Interface" />
         <option value="HTML File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -105,7 +132,7 @@
     &quot;Tomcat Server.Tomcat 9.0.107.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/CodeGym/Module4/spring-student-manager-grade&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/CodeGym/Module4/CGO-C0225L1-JV103/lesson5_database_orm/music-app&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -229,7 +256,13 @@
       <updated>1759238961517</updated>
       <workItem from="1759238962463" duration="6840000" />
       <workItem from="1759459464436" duration="22986000" />
-      <workItem from="1759492118602" duration="4124000" />
+      <workItem from="1759492118602" duration="9128000" />
+      <workItem from="1759563514022" duration="114000" />
+      <workItem from="1759928714983" duration="8000" />
+      <workItem from="1760085939296" duration="1258000" />
+      <workItem from="1760105047314" duration="1451000" />
+      <workItem from="1760192404002" duration="9897000" />
+      <workItem from="1760256317736" duration="15603000" />
     </task>
     <servers />
   </component>

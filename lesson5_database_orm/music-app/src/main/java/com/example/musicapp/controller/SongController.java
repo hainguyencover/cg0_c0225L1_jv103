@@ -1,14 +1,24 @@
 package com.example.musicapp.controller;
 
+import com.example.musicapp.exception.ResourceNotFoundException;
 import com.example.musicapp.model.Song;
+import com.example.musicapp.service.IArtistService;
+import com.example.musicapp.service.IGenreService;
 import com.example.musicapp.service.ISongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,112 +29,141 @@ public class SongController {
 
     @Autowired
     private ISongService songService;
-    @Value("${upload.path}")
-    private String uploadPath;
+    @Autowired
+    private IArtistService artistService;
+    @Autowired
+    private IGenreService genreService;
 
-    // Hiển thị danh sách bài hát
-//    @GetMapping
-//    public String listSongs(Model model) {
-//        model.addAttribute("songs", songService.findAll());
-//        model.addAttribute("isSearch", false);
-//        return "song/list"; // -> /WEB-INF/views/song/list.jsp (hoặc .html nếu dùng Thymeleaf)
-//    }
+    /**
+     * Phương thức trợ giúp để load danh sách Artist và Genre, tránh lặp code.
+     */
+    private void loadArtistsAndGenres(Model model) {
+        model.addAttribute("artists", artistService.findAll());
+        model.addAttribute("genres", genreService.findAll());
+    }
+
+    /**
+     * Hiển thị danh sách bài hát với chức năng lọc, tìm kiếm và phân trang.
+     */
     @GetMapping
-    public String listSongs(
-            @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "3") int size,
-            @RequestParam(required = false) String keyword,
-            Model model) {
+    public String listSongs(@RequestParam(required = false) String keyword,
+                            @RequestParam(required = false) Long artistId,
+                            @RequestParam(required = false) Long genreId,
+                            @RequestParam(defaultValue = "0") int page,
+                            @RequestParam(defaultValue = "5") int size,
+                            Model model) {
 
-        List<Song> songs = songService.findPage(page, size, keyword);
-        long totalItems = songService.count(keyword);
-        int totalPages = (int) Math.ceil((double) totalItems / size);
+        // Pageable trong Spring Data JPA là 0-indexed
+        Pageable pageable = PageRequest.of(page, size, Sort.by("title").ascending());
 
-        model.addAttribute("songs", songs);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", totalPages);
+        // Gọi service để lấy dữ liệu đã được lọc và phân trang
+        Page<Song> songPage = songService.findAllWithFilters(keyword, artistId, genreId, pageable);
+
+        model.addAttribute("songPage", songPage);
+
+        // Gửi lại các giá trị lọc đã chọn để hiển thị trên form
         model.addAttribute("keyword", keyword);
+        model.addAttribute("artistId", artistId);
+        model.addAttribute("genreId", genreId);
+
+        // Gửi danh sách Artist và Genre để đổ vào các dropdown lọc
+        loadArtistsAndGenres(model);
 
         return "song/list";
     }
 
-    // Form tạo bài hát mới
+    /**
+     * Hiển thị form tạo bài hát mới.
+     */
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("song", new Song());
+        loadArtistsAndGenres(model); // Load dữ liệu cho các dropdown
         return "song/create";
     }
 
-    // Xử lý tạo mới (có upload file)
-    @PostMapping("/create")
-    public String createSong(@ModelAttribute("song") Song song,
-                             @RequestParam("file") MultipartFile file) throws IOException {
-
-        if (!file.isEmpty()) {
-            String filePath = songService.saveFile(file);
-            song.setFilePath(filePath);
-        }
-        songService.save(song);
-        return "redirect:/songs";
-    }
-
-    // Form cập nhật
+    /**
+     * Hiển thị form cập nhật bài hát.
+     */
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
-        Song song = songService.findById(id);
-        model.addAttribute("song", song);
-        return "song/edit";
-    }
-
-    // Xử lý cập nhật
-    @PostMapping("/edit/{id}")
-    public String updateSong(
-            @PathVariable("id") Long id,
-            @ModelAttribute("song") Song song,
-            @RequestParam("file") MultipartFile file) {
-
-        Song existing = songService.findById(id);
-        if (existing == null) {
+    public String showEditForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            Song song = songService.findById(id);
+            model.addAttribute("song", song);
+            loadArtistsAndGenres(model); // Load dữ liệu cho các dropdown
+            return "song/edit";
+        } catch (ResourceNotFoundException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/songs";
         }
+    }
 
-        // Cập nhật thông tin cơ bản
-        existing.setTitle(song.getTitle());
-        existing.setArtist(song.getArtist());
-        existing.setGenre(song.getGenre());
+    /**
+     * Xử lý lưu (thêm mới hoặc cập nhật) một bài hát.
+     */
+    @PostMapping("/save")
+    public String saveSong(@Valid @ModelAttribute("song") Song song,
+                           BindingResult bindingResult,
+                           @RequestParam("file") MultipartFile file,
+                           Model model,
+                           RedirectAttributes redirectAttributes) {
 
-        if (!file.isEmpty()) {
-            String fileName = songService.saveFile(file);   // trả về newFileName
-            existing.setFilePath(fileName);                 // cập nhật vào object đang lưu
+        if (bindingResult.hasErrors()) {
+            loadArtistsAndGenres(model);
+            // Xác định xem nên trả về view create hay edit dựa vào sự tồn tại của ID
+            return (song.getId() != null) ? "song/edit" : "song/create";
         }
-        songService.update(existing);
+
+        // --- Xử lý file một cách an toàn ---
+        // Chỉ lưu file mới và cập nhật filePath nếu người dùng có chọn file mới
+        if (file != null && !file.isEmpty()) {
+            String fileName = songService.saveFile(file);
+            song.setFilePath(fileName);
+        } else {
+            // Nếu là form edit và không có file mới, phải giữ lại file cũ
+            if (song.getId() != null) {
+                Song existingSong = songService.findById(song.getId());
+                song.setFilePath(existingSong.getFilePath());
+            }
+        }
+
+        songService.save(song);
+        redirectAttributes.addFlashAttribute("message", "Lưu bài hát thành công!");
         return "redirect:/songs";
     }
 
-    // Xóa bài hát
+    /**
+     * Xóa một bài hát.
+     */
     @GetMapping("/delete/{id}")
-    public String deleteSong(@PathVariable("id") Long id) {
-        songService.delete(id);
+    public String deleteSong(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            songService.delete(id);
+            redirectAttributes.addFlashAttribute("message", "Xóa bài hát thành công!");
+        } catch (ResourceNotFoundException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Đã xảy ra lỗi khi xóa bài hát.");
+        }
         return "redirect:/songs";
     }
 
-    // Nghe nhạc
+    /**
+     * Phát nhạc và tăng lượt nghe.
+     */
     @GetMapping("/play/{id}")
-    public String playSong(@PathVariable("id") Long id, Model model) {
-        Song song = songService.findById(id);
-        model.addAttribute("song", song);
-        return "song/play";
-    }
+    public String playSong(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            Song song = songService.findById(id);
+            // Tăng lượt nghe
+            song.setPlayCount(song.getPlayCount() + 1);
+            songService.save(song); // Lưu lại thay đổi
 
-    @GetMapping("/search")
-    public String searchSongs(@RequestParam("keyword") String keyword, Model model) {
-        List<Song> results = songService.search(keyword);
-        model.addAttribute("songs", results);
-        model.addAttribute("keyword", keyword); // để hiển thị lại trong input
-
-        // đánh dấu là search
-        model.addAttribute("isSearch", true);
-
-        return "song/list"; // view list.html
+            model.addAttribute("song", song);
+            return "song/play";
+        } catch (ResourceNotFoundException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/songs";
+        }
     }
 }

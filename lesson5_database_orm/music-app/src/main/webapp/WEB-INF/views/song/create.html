@@ -2,277 +2,291 @@
 <!--<html xmlns:th="http://www.thymeleaf.org" lang="vi">-->
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
-<!--    <title>Thêm bài hát</title>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Thêm Bài Hát Mới</title>-->
+<!--    <style>-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            min-height: 100vh;-->
+<!--            padding: 20px;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--        }-->
+
+<!--        .container {-->
+<!--            max-width: 600px;-->
+<!--            width: 100%;-->
+<!--            background: white;-->
+<!--            border-radius: 15px;-->
+<!--            padding: 40px;-->
+<!--            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);-->
+<!--        }-->
+
+<!--        h1 {-->
+<!--            color: #667eea;-->
+<!--            margin-bottom: 30px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .form-group {-->
+<!--            margin-bottom: 20px;-->
+<!--        }-->
+
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 8px;-->
+<!--            color: #333;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .required {-->
+<!--            color: #e74c3c;-->
+<!--        }-->
+
+<!--        input[type="text"], select {-->
+<!--            width: 100%;-->
+<!--            padding: 12px;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 8px;-->
+<!--            font-size: 16px;-->
+<!--            transition: border-color 0.3s;-->
+<!--        }-->
+
+<!--        input[type="text"]:focus, select:focus {-->
+<!--            border-color: #667eea;-->
+<!--            outline: none;-->
+<!--        }-->
+
+<!--        .error-message {-->
+<!--            color: #e74c3c;-->
+<!--            font-size: 14px;-->
+<!--            margin-top: 5px;-->
+<!--        }-->
+
+<!--        input[type="file"] {-->
+<!--            display: none;-->
+<!--        }-->
+
+<!--        .file-input-label {-->
+<!--            display: inline-block;-->
+<!--            padding: 12px 20px;-->
+<!--            background: #f0f2f5;-->
+<!--            color: #555;-->
+<!--            border-radius: 8px;-->
+<!--            cursor: pointer;-->
+<!--            transition: background 0.3s;-->
+<!--        }-->
+
+<!--        .file-input-label:hover {-->
+<!--            background: #e4e6e9;-->
+<!--        }-->
+
+<!--        .file-name {-->
+<!--            margin-top: 10px;-->
+<!--            color: #27ae60;-->
+<!--            font-weight: bold;-->
+<!--        }-->
+
+<!--        .button-group {-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+<!--            gap: 15px;-->
+<!--            margin-top: 30px;-->
+<!--        }-->
+
+<!--        .btn {-->
+<!--            padding: 12px 30px;-->
+<!--            border: none;-->
+<!--            border-radius: 8px;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--            cursor: pointer;-->
+<!--            transition: all 0.3s;-->
+<!--            text-decoration: none;-->
+<!--            display: inline-block;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .btn-primary {-->
+<!--            background-color: #667eea;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background-color: #5a6fd8;-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);-->
+<!--        }-->
+
+<!--        .btn-secondary {-->
+<!--            background-color: #f0f2f5;-->
+<!--            color: #555;-->
+<!--        }-->
+<!--        .btn-secondary:hover {-->
+<!--            background-color: #e4e6e9;-->
+<!--        }-->
+<!--    </style>-->
 <!--</head>-->
 <!--<body>-->
-<!--<h2>➕ Thêm bài hát mới</h2>-->
+<!--<div class="container">-->
+<!--    <h1>Thêm Bài Hát Mới</h1>-->
+<!--    <form th:action="@{/songs/create}" th:object="${song}" method="post" enctype="multipart/form-data">-->
 
-<!--<form th:action="@{/songs/create}" method="post" enctype="multipart/form-data" th:object="${song}">-->
-<!--    <p>-->
-<!--        <label>Tiêu đề:</label><br>-->
-<!--        <input type="text" th:field="*{title}" required>-->
-<!--    </p>-->
+<!--        <div class="form-group">-->
+<!--            <label for="title">Tên Bài Hát <span class="required">*</span></label>-->
+<!--            <input type="text" id="title" th:field="*{title}" placeholder="VD: Nắng ấm xa dần">-->
+<!--            <div class="error-message" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>-->
+<!--        </div>-->
 
-<!--    <p>-->
-<!--        <label>Nghệ sĩ:</label><br>-->
-<!--        <input type="text" th:field="*{artist}" required>-->
-<!--    </p>-->
+<!--        <div class="form-group">-->
+<!--            <label for="artist">Nghệ Sĩ <span class="required">*</span></label>-->
+<!--            <input type="text" id="artist" th:field="*{artist}" placeholder="VD: Sơn Tùng M-TP">-->
+<!--            <div class="error-message" th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}"></div>-->
+<!--        </div>-->
 
-<!--    <p>-->
-<!--        <label>Thể loại:</label><br>-->
-<!--        <input type="text" th:field="*{genre}">-->
-<!--    </p>-->
+<!--        <div class="form-group">-->
+<!--            <label for="genre">Thể Loại <span class="required">*</span></label>-->
+<!--            <input type="text" id="genre" th:field="*{genre}" placeholder="VD: Pop, Ballad">-->
+<!--            <div class="error-message" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></div>-->
+<!--        </div>-->
 
-<!--    <p>-->
-<!--        <label>File nhạc (.mp3):</label><br>-->
-<!--        <input type="file" name="file" accept="audio/mp3,audio/*" required>-->
-<!--    </p>-->
+<!--        <div class="form-group">-->
+<!--            <label for="file">File Nhạc <span class="required">*</span></label>-->
+<!--            <div class="file-input-wrapper">-->
+<!--                <label for="file" class="file-input-label">-->
+<!--                    📁 Chọn file nhạc (MP3, WAV, OGG...)-->
+<!--                </label>-->
+<!--                <input type="file"-->
+<!--                       id="file"-->
+<!--                       name="file"-->
+<!--                       accept="audio/*"-->
+<!--                       onchange="displayFileName(this)">-->
+<!--                <div id="fileName" class="file-name"></div>-->
+<!--                <div class="error-message" th:if="${fileError}" th:text="${fileError}"></div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-<!--    <p>-->
-<!--        <button type="submit">💾 Lưu</button>-->
-<!--        <a th:href="@{/songs}">⬅ Quay lại</a>-->
-<!--    </p>-->
-<!--</form>-->
+<!--        <div class="button-group">-->
+<!--            <button type="submit" class="btn btn-primary">💾 Lưu</button>-->
+<!--            <a th:href="@{/songs}" class="btn btn-secondary">← Quay lại</a>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
 
+<!--<script>-->
+<!--    function displayFileName(input) {-->
+<!--        const fileName = input.files[0]?.name;-->
+<!--        const fileNameDiv = document.getElementById('fileName');-->
+<!--        if (fileName) {-->
+<!--            fileNameDiv.textContent = '✓ Đã chọn: ' + fileName;-->
+<!--        } else {-->
+<!--            fileNameDiv.textContent = '';-->
+<!--        }-->
+<!--    }-->
+<!--</script>-->
 <!--</body>-->
 <!--</html>-->
 
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm Bài Hát Mới</title>
+    <!-- Tích hợp Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Giữ lại một chút style tùy chỉnh để giao diện đẹp hơn */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         .container {
-            max-width: 600px;
-            width: 100%;
-            background: white;
-            border-radius: 15px;
+            max-width: 700px;
+            margin-top: 50px;
+            background-color: #ffffff;
             padding: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            color: #667eea;
+            color: #343a40;
             margin-bottom: 30px;
-            text-align: center;
         }
 
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #374151;
+        .form-label {
             font-weight: 600;
-        }
-
-        input[type="text"],
-        input[type="file"],
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        input[type="text"]:focus,
-        select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .file-input-wrapper input[type=file] {
-            position: absolute;
-            left: -9999px;
-        }
-
-        .file-input-label {
-            display: block;
-            padding: 12px 15px;
-            border: 2px dashed #667eea;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #f9fafb;
-        }
-
-        .file-input-label:hover {
-            background: #f3f4f6;
-            border-color: #5568d3;
-        }
-
-        .file-name {
-            margin-top: 10px;
-            color: #10b981;
-            font-size: 14px;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-decoration: none;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #6b7280;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #4b5563;
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .alert-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #ef4444;
-        }
-
-        .required {
-            color: #ef4444;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>🎵 Thêm Bài Hát Mới</h1>
+    <h1 class="text-center">Thêm Bài Hát Mới</h1>
 
-    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+    <!-- Form đã được cập nhật -->
+    <form th:action="@{/songs/save}" th:object="${song}" method="post" enctype="multipart/form-data">
 
-    <form th:action="@{/songs/create}"
-          th:object="${song}"
-          method="post"
-          enctype="multipart/form-data">
-
-        <div class="form-group">
-            <label for="title">Tên Bài Hát <span class="required">*</span></label>
-            <input type="text"
-                   id="title"
-                   th:field="*{title}"
-                   placeholder="Nhập tên bài hát"
-                   required>
+        <!-- Hiển thị lỗi validation tổng thể (nếu có) -->
+        <div th:if="${#fields.hasGlobalErrors()}" class="alert alert-danger">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
         </div>
 
-        <div class="form-group">
-            <label for="artist">Nghệ Sĩ <span class="required">*</span></label>
-            <input type="text"
-                   id="artist"
-                   th:field="*{artist}"
-                   placeholder="Nhập tên nghệ sĩ"
-                   required>
+        <!-- Tên Bài Hát -->
+        <div class="mb-3">
+            <label for="title" class="form-label">Tên Bài Hát</label>
+            <input type="text" id="title" class="form-control" th:field="*{title}" placeholder="VD: Nắng ấm xa dần">
+            <div class="text-danger mt-1" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
         </div>
 
-        <div class="form-group">
-            <label for="genre">Thể Loại <span class="required">*</span></label>
-            <select id="genre" th:field="*{genre}" required>
-                <option value="">-- Chọn thể loại --</option>
-                <option value="Pop">Pop</option>
-                <option value="Rock">Rock</option>
-                <option value="Ballad">Ballad</option>
-                <option value="R&B">R&B</option>
-                <option value="EDM">EDM</option>
-                <option value="Rap/Hip-hop">Rap/Hip-hop</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Classical">Classical</option>
-                <option value="Country">Country</option>
-                <option value="Khác">Khác</option>
+        <!-- THAY ĐỔI 1: Ô chọn Nghệ sĩ -->
+        <div class="mb-3">
+            <label for="artist" class="form-label">Nghệ Sĩ</label>
+            <!-- Sử dụng <select> thay vì <input type="text"> -->
+            <!-- th:field="*{artist}" sẽ tự động bind ID của artist được chọn vào đối tượng Song -->
+            <select id="artist" class="form-select" th:field="*{artist}">
+                <option value="">-- Chọn một nghệ sĩ --</option>
+                <!-- Lặp qua danh sách artists mà Controller đã gửi sang -->
+                <option th:each="artistOpt : ${artists}" th:value="${artistOpt.id}"
+                        th:text="${artistOpt.name}"></option>
             </select>
+            <div class="text-danger mt-1" th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}"></div>
         </div>
 
-        <div class="form-group">
-            <label for="file">File Nhạc <span class="required">*</span></label>
-            <div class="file-input-wrapper">
-                <label for="file" class="file-input-label">
-                    📁 Chọn file nhạc (MP3, WAV, OGG...)
-                </label>
-                <input type="file"
-                       id="file"
-                       name="file"
-                       accept="audio/*"
-                       onchange="displayFileName(this)"
-                       required>
-                <div id="fileName" class="file-name"></div>
-            </div>
+        <!-- THAY ĐỔI 2: Ô chọn Thể loại (đa lựa chọn) -->
+        <div class="mb-3">
+            <label for="genres" class="form-label">Thể Loại</label>
+            <small class="text-muted">(Giữ Ctrl/Cmd để chọn nhiều)</small>
+            <!-- Sử dụng <select multiple> để cho phép chọn nhiều -->
+            <!-- th:field="*{genres}" sẽ tự động bind danh sách ID của các genre được chọn -->
+            <select id="genres" class="form-select" th:field="*{genres}" multiple>
+                <!-- Lặp qua danh sách genres mà Controller đã gửi sang -->
+                <option th:each="genreOpt : ${genres}" th:value="${genreOpt.id}" th:text="${genreOpt.name}"></option>
+            </select>
+            <div class="text-danger mt-1" th:if="${#fields.hasErrors('genres')}" th:errors="*{genres}"></div>
         </div>
 
-        <div class="button-group">
-            <button type="submit" class="btn btn-primary">💾 Lưu</button>
-            <a th:href="@{/songs}" class="btn btn-secondary">← Quay lại</a>
+        <!-- File Nhạc -->
+        <div class="mb-3">
+            <label for="file" class="form-label">File Nhạc</label>
+            <input type="file" id="file" name="file" class="form-control" accept="audio/*">
+        </div>
+
+        <!-- Nút bấm -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+            <button type="submit" class="btn btn-primary px-4">Lưu</button>
+            <a th:href="@{/songs}" class="btn btn-secondary px-4">Quay lại</a>
         </div>
     </form>
 </div>
-
-<script>
-    function displayFileName(input) {
-        const fileName = input.files[0]?.name;
-        const fileNameDiv = document.getElementById('fileName');
-        if (fileName) {
-            fileNameDiv.textContent = '✓ Đã chọn: ' + fileName;
-        } else {
-            fileNameDiv.textContent = '';
-        }
-    }
-</script>
 </body>
 </html>
+

@@ -1,32 +1,281 @@
 <!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="vi">-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="">-->
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
-<!--    <title>Nghe nhạc</title>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title th:text="${song.title} + ' - Music Player'">Phát Nhạc</title>-->
+<!--    <style>-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);-->
+<!--            min-height: 100vh;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        .player-container {-->
+<!--            max-width: 500px;-->
+<!--            width: 100%;-->
+<!--            background: rgba(255, 255, 255, 0.95);-->
+<!--            border-radius: 20px;-->
+<!--            padding: 40px;-->
+<!--            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);-->
+<!--            backdrop-filter: blur(10px);-->
+<!--        }-->
+
+<!--        .album-art {-->
+<!--            width: 100%;-->
+<!--            height: 300px;-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            border-radius: 15px;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            margin-bottom: 30px;-->
+<!--            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);-->
+<!--            position: relative;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        .album-art::before {-->
+<!--            content: '🎵';-->
+<!--            font-size: 100px;-->
+<!--            animation: pulse 2s ease-in-out infinite;-->
+<!--        }-->
+
+<!--        @keyframes pulse {-->
+<!--            0%, 100% {-->
+<!--                transform: scale(1);-->
+<!--                opacity: 0.8;-->
+<!--            }-->
+<!--            50% {-->
+<!--                transform: scale(1.1);-->
+<!--                opacity: 1;-->
+<!--            }-->
+<!--        }-->
+
+<!--        .song-info {-->
+<!--            text-align: center;-->
+<!--            margin-bottom: 30px;-->
+<!--        }-->
+
+<!--        .song-title {-->
+<!--            font-size: 28px;-->
+<!--            font-weight: bold;-->
+<!--            color: #1f2937;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .song-artist {-->
+<!--            font-size: 18px;-->
+<!--            color: #6b7280;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+
+<!--        .song-genre {-->
+<!--            display: inline-block;-->
+<!--            padding: 5px 15px;-->
+<!--            background: #dbeafe;-->
+<!--            color: #1e40af;-->
+<!--            border-radius: 20px;-->
+<!--            font-size: 14px;-->
+<!--            font-weight: 600;-->
+<!--        }-->
+
+<!--        .audio-player {-->
+<!--            width: 100%;-->
+<!--            margin: 30px 0;-->
+<!--            padding: 15px;-->
+<!--            background: #f3f4f6;-->
+<!--            border-radius: 10px;-->
+<!--        }-->
+
+<!--        audio {-->
+<!--            width: 100%;-->
+<!--            outline: none;-->
+<!--        }-->
+
+<!--        audio::-webkit-media-controls-panel {-->
+<!--            background: #f3f4f6;-->
+<!--        }-->
+
+<!--        .controls {-->
+<!--            display: flex;-->
+<!--            gap: 15px;-->
+<!--            margin-top: 30px;-->
+<!--        }-->
+
+<!--        .btn {-->
+<!--            flex: 1;-->
+<!--            padding: 12px 20px;-->
+<!--            border: none;-->
+<!--            border-radius: 10px;-->
+<!--            cursor: pointer;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: 600;-->
+<!--            transition: all 0.3s;-->
+<!--            text-decoration: none;-->
+<!--            text-align: center;-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: center;-->
+<!--            gap: 8px;-->
+<!--        }-->
+
+<!--        .btn-primary {-->
+<!--            background: #667eea;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .btn-primary:hover {-->
+<!--            background: #5568d3;-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);-->
+<!--        }-->
+
+<!--        .btn-secondary {-->
+<!--            background: #6b7280;-->
+<!--            color: white;-->
+<!--        }-->
+
+<!--        .btn-secondary:hover {-->
+<!--            background: #4b5563;-->
+<!--            transform: translateY(-2px);-->
+<!--        }-->
+
+<!--        .visualizer {-->
+<!--            display: flex;-->
+<!--            align-items: flex-end;-->
+<!--            justify-content: center;-->
+<!--            gap: 3px;-->
+<!--            height: 40px;-->
+<!--            margin: 20px 0;-->
+<!--        }-->
+
+<!--        .bar {-->
+<!--            width: 4px;-->
+<!--            background: linear-gradient(to top, #667eea, #764ba2);-->
+<!--            border-radius: 2px;-->
+<!--            animation: sound 0.8s ease-in-out infinite;-->
+<!--        }-->
+
+<!--        .bar:nth-child(1) {-->
+<!--            animation-delay: 0s;-->
+<!--            height: 10px;-->
+<!--        }-->
+
+<!--        .bar:nth-child(2) {-->
+<!--            animation-delay: 0.1s;-->
+<!--            height: 20px;-->
+<!--        }-->
+
+<!--        .bar:nth-child(3) {-->
+<!--            animation-delay: 0.2s;-->
+<!--            height: 30px;-->
+<!--        }-->
+
+<!--        .bar:nth-child(4) {-->
+<!--            animation-delay: 0.3s;-->
+<!--            height: 25px;-->
+<!--        }-->
+
+<!--        .bar:nth-child(5) {-->
+<!--            animation-delay: 0.4s;-->
+<!--            height: 35px;-->
+<!--        }-->
+
+<!--        .bar:nth-child(6) {-->
+<!--            animation-delay: 0.5s;-->
+<!--            height: 20px;-->
+<!--        }-->
+
+<!--        .bar:nth-child(7) {-->
+<!--            animation-delay: 0.6s;-->
+<!--            height: 15px;-->
+<!--        }-->
+
+<!--        @keyframes sound {-->
+<!--            0%, 100% {-->
+<!--                height: 10px;-->
+<!--            }-->
+<!--            50% {-->
+<!--                height: 40px;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
 <!--</head>-->
 <!--<body>-->
-<!--<h2 th:text="'🎵 Đang phát: ' + ${song.title}"></h2>-->
-<!--<p><b>Nghệ sĩ:</b> <span th:text="${song.artist}"></span></p>-->
-<!--<p><b>Thể loại:</b> <span th:text="${song.genre}"></span></p>-->
+<!--<div class="player-container">-->
+<!--    <div class="album-art"></div>-->
 
-<!--<audio controls style="width: 400px;">-->
-<!--    <source th:src="${song.filePath}" type="audio/mpeg">-->
-<!--    Trình duyệt của bạn không hỗ trợ phát nhạc.-->
-<!--</audio>-->
+<!--    <div class="song-info">-->
+<!--        <h1 class="song-title" th:text="${song.title}">Tên Bài Hát</h1>-->
+<!--        <p class="song-artist" th:text="${song.artist}">Nghệ Sĩ</p>-->
+<!--        <span class="song-genre" th:text="${song.genre}">Thể Loại</span>-->
+<!--    </div>-->
 
-<!--<br><br>-->
-<!--<a th:href="@{/songs}">⬅ Quay lại danh sách</a>-->
+<!--    <div class="visualizer">-->
+<!--        <div class="bar"></div>-->
+<!--        <div class="bar"></div>-->
+<!--        <div class="bar"></div>-->
+<!--        <div class="bar"></div>-->
+<!--        <div class="bar"></div>-->
+<!--        <div class="bar"></div>-->
+<!--        <div class="bar"></div>-->
+<!--    </div>-->
+
+<!--    <div class="audio-player">-->
+<!--        <audio controls autoplay th:src="@{/music/{filename}(filename=${song.filePath})}">-->
+<!--            Trình duyệt của bạn không hỗ trợ phát nhạc.-->
+<!--        </audio>-->
+<!--    </div>-->
+
+<!--    <div class="controls">-->
+<!--        <a th:href="@{/songs}" class="btn btn-secondary">-->
+<!--            ← Quay lại-->
+<!--        </a>-->
+<!--        <a th:href="@{/songs/edit/{id}(id=${song.id})}" class="btn btn-primary">-->
+<!--            ✏️ Chỉnh sửa-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    const audio = document.querySelector('audio');-->
+<!--    const bars = document.querySelectorAll('.bar');-->
+
+<!--    audio.addEventListener('play', () => {-->
+<!--        bars.forEach(bar => {-->
+<!--            bar.style.animationPlayState = 'running';-->
+<!--        });-->
+<!--    });-->
+
+<!--    audio.addEventListener('pause', () => {-->
+<!--        bars.forEach(bar => {-->
+<!--            bar.style.animationPlayState = 'paused';-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 <!--</body>-->
 <!--</html>-->
-
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${song.title} + ' - Music Player'">Phát Nhạc</title>
+    <!-- Tích hợp Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Giữ lại phần lớn CSS đẹp mắt của bạn */
         * {
             margin: 0;
             padding: 0;
@@ -99,78 +348,16 @@
         .song-artist {
             font-size: 18px;
             color: #6b7280;
+            margin-bottom: 15px; /* Tăng khoảng cách một chút */
+        }
+
+        .genre-container {
             margin-bottom: 5px;
-        }
-
-        .song-genre {
-            display: inline-block;
-            padding: 5px 15px;
-            background: #dbeafe;
-            color: #1e40af;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .audio-player {
-            width: 100%;
-            margin: 30px 0;
-            padding: 15px;
-            background: #f3f4f6;
-            border-radius: 10px;
         }
 
         audio {
             width: 100%;
             outline: none;
-        }
-
-        audio::-webkit-media-controls-panel {
-            background: #f3f4f6;
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-decoration: none;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: #6b7280;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #4b5563;
-            transform: translateY(-2px);
         }
 
         .visualizer {
@@ -240,8 +427,14 @@
 
     <div class="song-info">
         <h1 class="song-title" th:text="${song.title}">Tên Bài Hát</h1>
-        <p class="song-artist" th:text="${song.artist}">Nghệ Sĩ</p>
-        <span class="song-genre" th:text="${song.genre}">Thể Loại</span>
+
+        <!-- THAY ĐỔI 1: Hiển thị tên nghệ sĩ từ đối tượng liên quan -->
+        <p class="song-artist" th:text="${song.artist.name}">Nghệ Sĩ</p>
+
+        <!-- THAY ĐỔI 2: Lặp qua Set<Genre> để hiển thị tất cả thể loại -->
+        <div class="genre-container">
+            <span th:each="genre : ${song.genres}" class="badge bg-primary me-1" th:text="${genre.name}">Thể Loại</span>
+        </div>
     </div>
 
     <div class="visualizer">
@@ -254,19 +447,15 @@
         <div class="bar"></div>
     </div>
 
-    <div class="audio-player">
+    <div class="audio-player p-3 bg-light rounded-3 my-4">
         <audio controls autoplay th:src="@{/music/{filename}(filename=${song.filePath})}">
             Trình duyệt của bạn không hỗ trợ phát nhạc.
         </audio>
     </div>
 
-    <div class="controls">
-        <a th:href="@{/songs}" class="btn btn-secondary">
-            ← Quay lại
-        </a>
-        <a th:href="@{/songs/edit/{id}(id=${song.id})}" class="btn btn-primary">
-            ✏️ Chỉnh sửa
-        </a>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+        <a th:href="@{/songs}" class="btn btn-secondary">← Quay lại danh sách</a>
+        <a th:href="@{/songs/edit/{id}(id=${song.id})}" class="btn btn-warning">Chỉnh sửa</a>
     </div>
 </div>
 
@@ -288,3 +477,4 @@
 </script>
 </body>
 </html>
+

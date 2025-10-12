@@ -1,7 +1,9 @@
 package com.example.musicapp.config;
 
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
@@ -9,7 +11,7 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{}; // có thể add HibernateConfig nếu tách riêng
+        return new Class[]{PersistenceJPAConfig.class}; // có thể add HibernateConfig nếu tách riêng
     }
 
     @Override
@@ -20,6 +22,14 @@ public class WebInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"}; // map DispatcherServlet
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return new Filter[]{characterEncodingFilter};
     }
 
     @Override

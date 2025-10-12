@@ -1,78 +1,103 @@
 package com.example.musicapp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "songs")
 public class Song {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title", nullable = false, length = 200)
+
+    @NotBlank(message = "Tên bài hát không được để trống")
+    @Size(max = 800, message = "Tên bài hát không vượt quá 800 ký tự")
+    @Pattern(regexp = "^[a-zA-Z0-9À-ỹ\\s]*$", message = "Tên bài hát không chứa ký tự đặc biệt")
+    @Column(nullable = false, length = 800)
     private String title;
-    @Column(name = "artist", nullable = false, length = 200)
-    private String artist;
-    @Column(name = "genre", nullable = false, length = 200)
-    private String genre;
-    @Column(name = "filePath", nullable = false, length = 200)
+
+    @Column(nullable = false)
     private String filePath;
+
+    @Column(name = "play_count", columnDefinition = "BIGINT DEFAULT 0")
+    private Long playCount = 0L;
+
+    /**
+     * Bây giờ, vì Artist và Song cùng package, Java có thể thấy nó.
+     * Lỗi trước đây có thể do bạn chưa tạo file Artist.java.
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "artist_id", nullable = false)
+    private Artist artist;
+
+    /**
+     * Sau khi import java.util.Set, Java đã hiểu Set là một kiểu dữ liệu.
+     * Lỗi đã được khắc phục.
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "song_genre",
+            joinColumns = @JoinColumn(name = "song_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private Set<Genre> genres = new HashSet<>();
+
 
     public Song() {
     }
 
-    public Song(String title, String artist, String genre, String filePath) {
-        this.title = title;
-        this.artist = artist;
-        this.genre = genre;
-        this.filePath = filePath;
-    }
-
-
-    public Song(Long id, String title, String artist, String genre, String filePath) {
-        this.id = id;
-        this.title = title;
-        this.artist = artist;
-        this.genre = genre;
-        this.filePath = filePath;
-    }
-
+    // Getters and Setters...
     public Long getId() {
         return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public String getFilePath() {
-        return filePath;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public String getFilePath() {
+        return filePath;
     }
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
+
+    public Long getPlayCount() {
+        return playCount;
+    }
+
+    public void setPlayCount(Long playCount) {
+        this.playCount = playCount;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
 }
+
