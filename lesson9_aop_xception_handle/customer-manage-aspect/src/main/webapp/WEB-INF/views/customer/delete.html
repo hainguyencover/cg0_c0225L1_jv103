@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Xóa khách hàng</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-warning" role="alert">
+                        <h5 class="alert-heading">
+                            <i class="fas fa-exclamation-circle me-2"></i>Cảnh báo!
+                        </h5>
+                        <p class="mb-0">Bạn sắp xóa một khách hàng. Hành động này không thể hoàn tác!</p>
+                    </div>
+
+                    <div class="customer-info p-3 border rounded bg-light">
+                        <h5 class="mb-3">Thông tin khách hàng sẽ bị xóa:</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <tr>
+                                    <th width="40%">ID:</th>
+                                    <td th:text="${customer.id}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Họ tên:</th>
+                                    <td th:text="${customer.name}" class="fw-bold"></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td th:text="${customer.email}"></td>
+                                </tr>
+                                <tr>
+                                    <th>Điện thoại:</th>
+                                    <td th:text="${customer.phone ?: 'N/A'}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <form th:action="@{/customers/delete}" method="post" th:object="${customer}" class="mt-4">
+                        <input type="hidden" th:field="*{id}" />
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                            <button type="submit" class="btn btn-danger btn-lg me-md-3" onclick="return confirmDelete()">
+                                <i class="fas fa-trash me-2"></i>Xác nhận xóa
+                            </button>
+                            <a th:href="@{/customers}" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-times me-2"></i>Hủy bỏ
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmDelete() {
+        return confirm('Bạn có CHẮC CHẮN muốn xóa khách hàng này? Hành động này không thể hoàn tác!');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">📚 Library Management</div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="borrow.html">Borrow</a></li>
+            <li><a href="return.html">Return</a></li>
+            <li><a href="statistics.html">Statistics</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <section class="hero">
+        <h1>Welcome to Library Management System</h1>
+        <p>Manage your library books with ease using AOP-powered logging</p>
+    </section>
+
+    <section class="dashboard">
+        <h2>System Overview</h2>
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-value" id="totalBooks">-</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+                <div class="stat-value" id="availableBooks">-</div>
+                <div class="stat-label">Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📖</div>
+                <div class="stat-value" id="borrowedBooks">-</div>
+                <div class="stat-label">Borrowed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-value" id="totalBorrows">-</div>
+                <div class="stat-label">Total Borrows</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🔄</div>
+                <div class="stat-value" id="currentBorrows">-</div>
+                <div class="stat-label">Current Borrows</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👁️</div>
+                <div class="stat-value" id="totalVisits">-</div>
+                <div class="stat-label">Total Visits</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-grid">
+            <a href="books.html" class="action-card">
+                <div class="action-icon">📚</div>
+                <h3>Browse Books</h3>
+                <p>View all available books</p>
+            </a>
+            <a href="borrow.html" class="action-card">
+                <div class="action-icon">📖</div>
+                <h3>Borrow Book</h3>
+                <p>Borrow a book from library</p>
+            </a>
+            <a href="return.html" class="action-card">
+                <div class="action-icon">🔄</div>
+                <h3>Return Book</h3>
+                <p>Return your borrowed book</p>
+            </a>
+            <a href="statistics.html" class="action-card">
+                <div class="action-icon">📊</div>
+                <h3>Statistics</h3>
+                <p>View library statistics</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="recent-activity">
+        <h2>Recent Activity</h2>
+        <div class="activity-list" id="recentActivity">
+            <p class="loading">Loading recent activity...</p>
+        </div>
+    </section>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Library Management System | Built with Java EE 8, AOP & Gradle</p>
+    </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

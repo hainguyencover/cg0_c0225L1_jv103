@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <title>Trang chủ</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <div class="jumbotron bg-light p-5 rounded">
+        <h1 class="display-4 text-primary mb-4">
+          <i class="fas fa-users me-3"></i>Customer Manager
+        </h1>
+        <p class="lead mb-4">
+          Ứng dụng quản lý khách hàng chuyên nghiệp với đầy đủ tính năng CRUD,
+          upload avatar và giao diện hiện đại.
+        </p>
+        <hr class="my-4">
+        <div class="row mt-5">
+          <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center">
+                <i class="fas fa-list fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Quản lý khách hàng</h5>
+                <p class="card-text">Xem danh sách và quản lý thông tin khách hàng</p>
+                <a th:href="@{/customers}" class="btn btn-primary">Xem danh sách</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+              <div class="card-body text-center">
+                <i class="fas fa-user-plus fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Thêm mới</h5>
+                <p class="card-text">Thêm khách hàng mới vào hệ thống</p>
+                <a th:href="@{/customers/create}" class="btn btn-success">Thêm khách hàng</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

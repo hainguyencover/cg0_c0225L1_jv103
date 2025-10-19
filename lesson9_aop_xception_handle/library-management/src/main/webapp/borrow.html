@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrow Book - Library Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">📚 Library Management</div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="books.html">Books</a></li>
+            <li><a href="borrow.html" class="active">Borrow</a></li>
+            <li><a href="return.html">Return</a></li>
+            <li><a href="statistics.html">Statistics</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <section class="page-header">
+        <h1>📖 Borrow a Book</h1>
+        <p>Select a book and enter your name to borrow</p>
+    </section>
+
+    <div class="two-column">
+        <section class="form-section">
+            <h2>Borrow Form</h2>
+            <form id="borrowForm" onsubmit="handleBorrow(event)">
+                <div class="form-group">
+                    <label for="bookSelect">Select Book:</label>
+                    <select id="bookSelect" required>
+                        <option value="">-- Select a book --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="borrowerName">Your Name:</label>
+                    <input type="text" id="borrowerName" placeholder="Enter your full name" required />
+                </div>
+
+                <div id="bookInfo" class="book-info" style="display: none;">
+                    <h3>Selected Book:</h3>
+                    <p><strong>Title:</strong> <span id="selectedTitle"></span></p>
+                    <p><strong>Author:</strong> <span id="selectedAuthor"></span></p>
+                    <p><strong>Available:</strong> <span id="selectedAvailable"></span> copies</p>
+                </div>
+
+                <button type="submit" class="btn-primary">📖 Borrow Book</button>
+            </form>
+
+            <div id="borrowResult" class="result-box" style="display: none;">
+                <!-- Result will be shown here -->
+            </div>
+        </section>
+
+        <section class="list-section">
+            <h2>Currently Borrowed Books</h2>
+            <div id="currentBorrows" class="borrow-list">
+                <p class="loading">Loading borrowed books...</p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Library Management System</p>
+    </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/borrow.js"></script>
+</body>
+</html>

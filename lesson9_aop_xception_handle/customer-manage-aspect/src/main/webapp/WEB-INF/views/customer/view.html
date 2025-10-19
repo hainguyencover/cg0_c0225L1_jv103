@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Thông tin khách hàng</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-user me-2"></i>Thông tin khách hàng
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-4 text-center mb-4">
+                            <div th:if="${customer.avatar}">
+                                <img th:src="@{'/uploads/' + ${customer.avatar}}"
+                                     class="rounded-circle shadow"
+                                     style="width: 200px; height: 200px; object-fit: cover;"
+                                     alt="Customer Avatar">
+                            </div>
+                            <div th:unless="${customer.avatar}" class="text-muted">
+                                <i class="fas fa-user-circle fa-8x"></i>
+                                <p class="mt-2">Chưa có ảnh đại diện</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="table-responsive">
+                                <table class="table table-borderless">
+                                    <tr>
+                                        <th width="30%" class="text-muted">ID:</th>
+                                        <td th:text="${customer.id}" class="fw-bold"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Họ tên:</th>
+                                        <td th:text="${customer.name}" class="fw-bold fs-5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Email:</th>
+                                        <td th:text="${customer.email}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-muted">Số điện thoại:</th>
+                                        <td th:text="${customer.phone ?: 'N/A'}"></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="mt-4">
+                                <a th:href="@{/customers/{id}/edit(id=${customer.id})}"
+                                   class="btn btn-warning me-2">
+                                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                                </a>
+                                <a th:href="@{/customers/{id}/delete(id=${customer.id})}"
+                                   class="btn btn-danger me-2">
+                                    <i class="fas fa-trash me-2"></i>Xóa
+                                </a>
+                                <a th:href="@{/customers}" class="btn btn-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

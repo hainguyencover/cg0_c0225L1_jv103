@@ -1,0 +1,23 @@
+<!--
+  File này phải đặt tại: src/main/resources/META-INF/aop.xml
+  AspectJ Load-Time Weaving (LTW) configuration
+-->
+<aspectj>
+    <aspects>
+        <!-- Register all aspects -->
+        <aspect name="com.library.librarymanagement.aspect.BookActionLogAspect"/>
+        <aspect name="com.library.librarymanagement.aspect.VisitLogAspect"/>
+        <aspect name="com.library.librarymanagement.aspect.ErrorLogAspect"/>
+
+        <!-- Có thể thêm các aspect khác ở đây -->
+    </aspects>
+
+    <weaver options="-verbose -showWeaveInfo">
+        <!-- Weave classes trong package com.library -->
+        <include within="com.library.librarymanagement..*"/>
+
+        <!-- Exclude các class không cần weave (tùy chọn) -->
+        <!-- <exclude within="com.library.config..*"/> -->
+        <!-- <exclude within="com.library.entity..*"/> -->
+    </weaver>
+</aspectj>

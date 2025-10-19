@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.10.2'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compileOnly('javax.servlet:javax.servlet-api:4.0.1')
+
+    // === Spring MVC Core ===
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.30'
+
+    // === View Layer: Thymeleaf ===
+    implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.1.1.RELEASE'
+    implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.4.RELEASE'
+
+    // === Data Layer: Spring Data JPA + Hibernate + MySQL ===
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.18'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.15.Final'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+
+    // === Multipart & Servlet API ===
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.5'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
+    implementation group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+    // === Validation (JSR 380) ===
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.2.5.Final'
+
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.13'
+    implementation group: 'ch.qos.logback', name: 'logback-core', version: '1.2.13'
+
+    configurations.all {
+        exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+        exclude group: 'log4j', module: 'log4j'
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+
+    // === AOP (Aspect-Oriented Programming) ===
+    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.30'
+    implementation group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.21'
+    implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.21'
+
+    // === Testing ===
+    testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.30'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
+}
+
+test {
+    useJUnitPlatform()
+}

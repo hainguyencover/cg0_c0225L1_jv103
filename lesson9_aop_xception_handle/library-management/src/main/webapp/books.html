@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - Library Management</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">📚 Library Management</div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="books.html" class="active">Books</a></li>
+            <li><a href="borrow.html">Borrow</a></li>
+            <li><a href="return.html">Return</a></li>
+            <li><a href="statistics.html">Statistics</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <section class="page-header">
+        <h1>📚 Library Books</h1>
+        <p>Browse and search available books</p>
+    </section>
+
+    <section class="filters">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search books by title..." />
+            <button onclick="searchBooks()">🔍 Search</button>
+        </div>
+        <div class="filter-box">
+            <label for="categoryFilter">Filter by Category:</label>
+            <select id="categoryFilter" onchange="filterByCategory()">
+                <option value="">All Categories</option>
+            </select>
+        </div>
+        <button onclick="loadAllBooks()" class="btn-secondary">Show All</button>
+    </section>
+
+    <section class="books-section">
+        <h2>Available Books (<span id="bookCount">0</span>)</h2>
+        <div id="booksList" class="books-grid">
+            <p class="loading">Loading books...</p>
+        </div>
+    </section>
+</div>
+
+<!-- Book Detail Modal -->
+<div id="bookModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modalTitle">Book Details</h2>
+        <div id="modalBody">
+            <!-- Content will be inserted here -->
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Library Management System</p>
+    </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/books.js"></script>
+</body>
+</html>
