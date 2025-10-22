@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.10.2'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    compileOnly('javax.servlet:javax.servlet-api:4.0.1')
+
+    // Spring Core + Web MVC
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.31'
+    implementation group: 'org.springframework', name: 'spring-orm', version: '5.3.31'
+    implementation group: 'org.springframework', name: 'spring-tx', version: '5.3.31'
+
+    // Hibernate ORM compatible with Spring 5
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.15.Final'
+
+    // Spring Data JPA (phù hợp Hibernate 5 + Spring 5)
+    implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.7.18'
+
+    // MySQL Connector (Java 8 vẫn ok)
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+
+    // Jackson cho JSON
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.5'
+
+    // Logging (bắt buộc nếu chạy Spring 5)
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
