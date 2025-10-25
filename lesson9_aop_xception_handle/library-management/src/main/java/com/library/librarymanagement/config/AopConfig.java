@@ -8,14 +8,14 @@ import org.aspectj.lang.Aspects;
 public class AopConfig {
     private static boolean initialized = false;
 
-    public static void init() {
+    public static void initialize() {
         if (!initialized) {
-            BookActionLogAspect bookActionLogAspect = Aspects.aspectOf(BookActionLogAspect.class);
-            VisitLogAspect visitLogAspect = Aspects.aspectOf(VisitLogAspect.class);
-            ErrorLogAspect errorLogAspect = Aspects.aspectOf(ErrorLogAspect.class);
+            // Note: AOP aspects are optional in this setup
+            // They will work if AspectJ LTW is configured, but app will run without them
 
             initialized = true;
-            System.out.println("AOP aspects initialized successfully");
+            System.out.println("[AOP] AOP configuration initialized (aspects are optional)");
+            System.out.println("[AOP] To enable full AOP logging, configure AspectJ Load-Time Weaving");
         }
     }
 }

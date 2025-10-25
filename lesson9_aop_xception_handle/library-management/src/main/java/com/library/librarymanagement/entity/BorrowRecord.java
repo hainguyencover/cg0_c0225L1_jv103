@@ -6,7 +6,7 @@ public class BorrowRecord {
     private Long borrowId;
     private String borrowCode;
     private Integer bookId;
-    private String borrowName;
+    private String borrowerName;
     private Timestamp borrowDate;
     private Timestamp returnDate;
     private String status;
@@ -15,10 +15,10 @@ public class BorrowRecord {
     public BorrowRecord() {
     }
 
-    public BorrowRecord(String borrowCode, Integer bookId, String borrowName) {
+    public BorrowRecord(String borrowCode, Integer bookId, String borrowerName) {
         this.borrowCode = borrowCode;
         this.bookId = bookId;
-        this.borrowName = borrowName;
+        this.borrowerName = borrowerName;
         this.status = "BORROWED";
     }
 
@@ -46,12 +46,12 @@ public class BorrowRecord {
         this.bookId = bookId;
     }
 
-    public String getBorrowName() {
-        return borrowName;
+    public String getBorrowerName() {
+        return borrowerName;
     }
 
-    public void setBorrowName(String borrowName) {
-        this.borrowName = borrowName;
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
     }
 
     public Timestamp getBorrowDate() {
@@ -92,7 +92,7 @@ public class BorrowRecord {
                 "borrowId=" + borrowId +
                 ", borrowCode='" + borrowCode + '\'' +
                 ", bookId=" + bookId +
-                ", borrowName='" + borrowName + '\'' +
+                ", borrowerName='" + borrowerName + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

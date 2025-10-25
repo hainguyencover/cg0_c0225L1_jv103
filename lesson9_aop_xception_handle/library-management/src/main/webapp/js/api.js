@@ -1,12 +1,18 @@
 // API Configuration
-const API_BASE_URL = 'http://localhost:8080/library-management';
+// Tự động detect context path
+const API_BASE_URL = window.location.origin + '/library-management';
+
+console.log('[API] Base URL:', API_BASE_URL);
 
 // API Helper Functions
 const API = {
     // Books API
     async getAllBooks() {
+        console.log('[API] Calling getAllBooks...');
         const response = await fetch(`${API_BASE_URL}/books`);
-        return await response.json();
+        const data = await response.json();
+        console.log('[API] getAllBooks response:', data);
+        return data;
     },
 
     async getBookById(id) {

@@ -18,11 +18,11 @@ async function loadOverview() {
             document.getElementById('currentBorrows').textContent = data.currentBorrows || 0;
             document.getElementById('totalVisits').textContent = data.totalVisits || 0;
         } else {
-            showError('statsGrid', 'Failed to load overview data');
+            showError('statsGrid', 'Không thể tải dữ liệu tổng quan');
         }
     } catch (error) {
-        console.error('Error loading overview:', error);
-        showError('statsGrid', 'Error connecting to server');
+        console.error('Lỗi tải tổng quan:', error);
+        showError('statsGrid', 'Lỗi kết nối máy chủ');
     }
 }
 
@@ -32,15 +32,15 @@ async function loadRecentActivity() {
         const activityDiv = document.getElementById('recentActivity');
 
         if (result.success && result.data.length > 0) {
-            const recentItems = result.data.slice(0, 5); // Show only 5 recent
+            const recentItems = result.data.slice(0, 5);
 
             let html = '<div class="activity-list">';
             recentItems.forEach(item => {
                 html += `
                     <div class="activity-item-list">
-                        📖 <strong>${item.borrowerName}</strong> borrowed 
+                        📖 <strong>${item.borrowerName}</strong> đã mượn 
                         "<em>${item.bookTitle}</em>" 
-                        on ${formatDate(item.borrowDate)}
+                        vào ${formatDate(item.borrowDate)}
                         ${formatBorrowCode(item.borrowCode)}
                     </div>
                 `;
@@ -49,10 +49,10 @@ async function loadRecentActivity() {
 
             activityDiv.innerHTML = html;
         } else {
-            activityDiv.innerHTML = '<p class="loading">No recent activity</p>';
+            activityDiv.innerHTML = '<p class="loading">Không có hoạt động gần đây</p>';
         }
     } catch (error) {
-        console.error('Error loading recent activity:', error);
-        showError('recentActivity', 'Error loading activity');
+        console.error('Lỗi tải hoạt động:', error);
+        showError('recentActivity', 'Lỗi tải hoạt động');
     }
 }

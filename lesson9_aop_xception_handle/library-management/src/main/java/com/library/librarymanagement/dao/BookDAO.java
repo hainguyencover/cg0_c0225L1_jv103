@@ -10,7 +10,7 @@ import java.util.List;
 public class BookDAO {
     public List<Book> findAll() throws SQLException {
         List<Book> books = new ArrayList<>();
-        String sql = "SELECT * FROM book ORDER BY create_at DESC";
+        String sql = "SELECT * FROM book ORDER BY created_at DESC";
 
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);) {

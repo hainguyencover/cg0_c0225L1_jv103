@@ -46,19 +46,19 @@ async function loadCurrentBorrows() {
                 html += `
                     <div class="borrow-item">
                         <h4>${borrow.bookTitle}</h4>
-                        <p><strong>Borrower:</strong> ${borrow.borrowerName}</p>
-                        <p><strong>Code:</strong> ${formatBorrowCode(borrow.borrowCode)}</p>
-                        <p><strong>Date:</strong> ${formatDate(borrow.borrowDate)}</p>
+                        <p><strong>Người mượn:</strong> ${borrow.borrowerName}</p>
+                        <p><strong>Mã:</strong> ${formatBorrowCode(borrow.borrowCode)}</p>
+                        <p><strong>Ngày mượn:</strong> ${formatDate(borrow.borrowDate)}</p>
                     </div>
                 `;
             });
             borrowsDiv.innerHTML = html;
         } else {
-            borrowsDiv.innerHTML = '<p class="loading">No currently borrowed books</p>';
+            borrowsDiv.innerHTML = '<p class="loading">Không có sách đang được mượn</p>';
         }
     } catch (error) {
-        console.error('Error loading current borrows:', error);
-        showError('currentBorrows', 'Error loading data');
+        console.error('Lỗi tải danh sách:', error);
+        showError('currentBorrows', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -83,18 +83,18 @@ async function handleBorrow(event) {
     const borrowerName = document.getElementById('borrowerName').value.trim();
 
     if (!bookId) {
-        alert('Please select a book');
+        alert('Vui lòng chọn sách');
         return;
     }
 
     if (!borrowerName) {
-        alert('Please enter your name');
+        alert('Vui lòng nhập tên của bạn');
         return;
     }
 
     const submitBtn = event.target.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Processing...';
+    submitBtn.textContent = 'Đang xử lý...';
 
     try {
         const result = await API.borrowBook(bookId, borrowerName);
@@ -104,41 +104,39 @@ async function handleBorrow(event) {
         if (result.success) {
             resultDiv.className = 'result-box success';
             resultDiv.innerHTML = `
-                <h3>✓ Success!</h3>
+                <h3>✓ Mượn Thành Công!</h3>
                 <p>${result.message}</p>
-                <p><strong>Your Borrow Code:</strong> <span style="font-size: 1.5rem; font-weight: bold; color: #2563eb;">${result.borrowCode}</span></p>
+                <p><strong>Mã Mượn Của Bạn:</strong> <span style="font-size: 1.5rem; font-weight: bold; color: #2563eb;">${result.borrowCode}</span></p>
                 <p style="color: #991b1b; margin-top: 1rem;">
-                    ⚠️ Please save this code! You will need it to return the book.
+                    ⚠️ Vui lòng lưu mã này! Bạn sẽ cần nó để trả sách.
                 </p>
             `;
             resultDiv.style.display = 'block';
 
-            // Reset form
             document.getElementById('borrowForm').reset();
             document.getElementById('bookInfo').style.display = 'none';
 
-            // Reload data
             await loadAvailableBooks();
             await loadCurrentBorrows();
         } else {
             resultDiv.className = 'result-box error';
             resultDiv.innerHTML = `
-                <h3>✗ Error</h3>
-                <p>${result.error || 'Failed to borrow book'}</p>
+                <h3>✗ Lỗi</h3>
+                <p>${result.error || 'Không thể mượn sách'}</p>
             `;
             resultDiv.style.display = 'block';
         }
     } catch (error) {
-        console.error('Error borrowing book:', error);
+        console.error('Lỗi mượn sách:', error);
         const resultDiv = document.getElementById('borrowResult');
         resultDiv.className = 'result-box error';
         resultDiv.innerHTML = `
-            <h3>✗ Error</h3>
-            <p>Error connecting to server. Please try again.</p>
+            <h3>✗ Lỗi</h3>
+            <p>Lỗi kết nối máy chủ. Vui lòng thử lại.</p>
         `;
         resultDiv.style.display = 'block';
     } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = '📖 Borrow Book';
+        submitBtn.textContent = '📖 Mượn Sách';
     }
 }

@@ -144,7 +144,7 @@ public class BorrowService {
                 1,
                 beforeQuantity,
                 beforeQuantity + 1,
-                record.getBorrowName()
+                record.getBorrowerName()
         );
         logBookActionDAO.insert(log);
 

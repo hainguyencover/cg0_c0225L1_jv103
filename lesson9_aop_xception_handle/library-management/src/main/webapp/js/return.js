@@ -10,27 +10,27 @@ async function loadReturnHistory() {
         const historyDiv = document.getElementById('returnHistory');
 
         if (result.success && result.data.length > 0) {
-            const recentReturns = result.data.slice(0, 10); // Show 10 most recent
+            const recentReturns = result.data.slice(0, 10);
 
             let html = '';
             recentReturns.forEach(record => {
                 html += `
                     <div class="borrow-item">
                         <h4>${record.bookTitle}</h4>
-                        <p><strong>Borrower:</strong> ${record.borrowerName}</p>
-                        <p><strong>Code:</strong> ${formatBorrowCode(record.borrowCode)}</p>
-                        <p><strong>Borrowed:</strong> ${formatDate(record.borrowDate)}</p>
-                        <p><strong>Returned:</strong> ${formatDate(record.returnDate)}</p>
+                        <p><strong>Người mượn:</strong> ${record.borrowerName}</p>
+                        <p><strong>Mã:</strong> ${formatBorrowCode(record.borrowCode)}</p>
+                        <p><strong>Ngày mượn:</strong> ${formatDate(record.borrowDate)}</p>
+                        <p><strong>Ngày trả:</strong> ${formatDate(record.returnDate)}</p>
                     </div>
                 `;
             });
             historyDiv.innerHTML = html;
         } else {
-            historyDiv.innerHTML = '<p class="loading">No return history</p>';
+            historyDiv.innerHTML = '<p class="loading">Không có lịch sử trả sách</p>';
         }
     } catch (error) {
-        console.error('Error loading return history:', error);
-        showError('returnHistory', 'Error loading data');
+        console.error('Lỗi tải lịch sử:', error);
+        showError('returnHistory', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -38,17 +38,17 @@ async function validateCode() {
     const borrowCode = document.getElementById('borrowCode').value.trim();
 
     if (!borrowCode) {
-        alert('Please enter a borrow code');
+        alert('Vui lòng nhập mã mượn');
         return;
     }
 
     if (borrowCode.length !== 5 || !/^\d+$/.test(borrowCode)) {
-        alert('Borrow code must be exactly 5 digits');
+        alert('Mã mượn phải là 5 chữ số');
         return;
     }
 
     const validationDiv = document.getElementById('codeValidation');
-    validationDiv.innerHTML = '<p class="loading">Validating code...</p>';
+    validationDiv.innerHTML = '<p class="loading">Đang kiểm tra mã...</p>';
     validationDiv.style.display = 'block';
 
     try {
@@ -60,36 +60,36 @@ async function validateCode() {
             if (result.canReturn) {
                 validationDiv.className = 'result-box success';
                 validationDiv.innerHTML = `
-                    <h3>✓ Valid Code</h3>
-                    <p><strong>Book:</strong> ${record.bookTitle}</p>
-                    <p><strong>Borrower:</strong> ${record.borrowerName}</p>
-                    <p><strong>Borrowed on:</strong> ${formatDate(record.borrowDate)}</p>
+                    <h3>✓ Mã Hợp Lệ</h3>
+                    <p><strong>Sách:</strong> ${record.bookTitle}</p>
+                    <p><strong>Người mượn:</strong> ${record.borrowerName}</p>
+                    <p><strong>Ngày mượn:</strong> ${formatDate(record.borrowDate)}</p>
                     <p style="color: #065f46; margin-top: 1rem;">
-                        This book can be returned. Click "Return Book" button below.
+                        Sách này có thể được trả. Nhấn nút "Trả Sách" bên dưới.
                     </p>
                 `;
             } else {
                 validationDiv.className = 'result-box error';
                 validationDiv.innerHTML = `
-                    <h3>⚠️ Already Returned</h3>
+                    <h3>⚠️ Đã Trả Rồi</h3>
                     <p>${result.message}</p>
-                    <p><strong>Book:</strong> ${record.bookTitle}</p>
-                    <p><strong>Returned on:</strong> ${formatDate(record.returnDate)}</p>
+                    <p><strong>Sách:</strong> ${record.bookTitle}</p>
+                    <p><strong>Ngày trả:</strong> ${formatDate(record.returnDate)}</p>
                 `;
             }
         } else {
             validationDiv.className = 'result-box error';
             validationDiv.innerHTML = `
-                <h3>✗ Invalid Code</h3>
-                <p>${result.error || 'Borrow code not found'}</p>
+                <h3>✗ Mã Không Hợp Lệ</h3>
+                <p>${result.error || 'Không tìm thấy mã mượn'}</p>
             `;
         }
     } catch (error) {
-        console.error('Error validating code:', error);
+        console.error('Lỗi kiểm tra mã:', error);
         validationDiv.className = 'result-box error';
         validationDiv.innerHTML = `
-            <h3>✗ Error</h3>
-            <p>Error connecting to server</p>
+            <h3>✗ Lỗi</h3>
+            <p>Lỗi kết nối máy chủ</p>
         `;
     }
 }
@@ -100,25 +100,25 @@ async function handleReturn(event) {
     const borrowCode = document.getElementById('borrowCode').value.trim();
 
     if (!borrowCode) {
-        alert('Please enter a borrow code');
+        alert('Vui lòng nhập mã mượn');
         return;
     }
 
     if (borrowCode.length !== 5 || !/^\d+$/.test(borrowCode)) {
-        alert('Borrow code must be exactly 5 digits');
+        alert('Mã mượn phải là 5 chữ số');
         return;
     }
 
-    if (!confirm(`Are you sure you want to return the book with code ${borrowCode}?`)) {
+    if (!confirm(`Bạn có chắc muốn trả sách với mã ${borrowCode}?`)) {
         return;
     }
 
     const submitBtn = event.target.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Processing...';
+    submitBtn.textContent = 'Đang xử lý...';
 
     const resultDiv = document.getElementById('returnResult');
-    resultDiv.innerHTML = '<p class="loading">Processing return...</p>';
+    resultDiv.innerHTML = '<p class="loading">Đang xử lý trả sách...</p>';
     resultDiv.style.display = 'block';
 
     try {
@@ -127,46 +127,44 @@ async function handleReturn(event) {
         if (result.success) {
             resultDiv.className = 'result-box success';
             resultDiv.innerHTML = `
-                <h3>✓ Book Returned Successfully!</h3>
+                <h3>✓ Trả Sách Thành Công!</h3>
                 <p>${result.message}</p>
                 <div style="margin-top: 1rem; padding: 1rem; background: #f3f4f6; border-radius: 4px;">
-                    <p><strong>Book:</strong> ${result.bookTitle}</p>
-                    <p><strong>Borrower:</strong> ${result.borrowerName}</p>
-                    <p><strong>Borrowed:</strong> ${formatDate(result.borrowDate)}</p>
-                    <p><strong>Returned:</strong> ${formatDate(result.returnDate)}</p>
-                    <p><strong>Code:</strong> ${formatBorrowCode(result.borrowCode)}</p>
+                    <p><strong>Sách:</strong> ${result.bookTitle}</p>
+                    <p><strong>Người mượn:</strong> ${result.borrowerName}</p>
+                    <p><strong>Ngày mượn:</strong> ${formatDate(result.borrowDate)}</p>
+                    <p><strong>Ngày trả:</strong> ${formatDate(result.returnDate)}</p>
+                    <p><strong>Mã:</strong> ${formatBorrowCode(result.borrowCode)}</p>
                 </div>
-                <p style="margin-top: 1rem;">Thank you for using our library!</p>
+                <p style="margin-top: 1rem;">Cảm ơn bạn đã sử dụng thư viện!</p>
             `;
 
-            // Reset form
             document.getElementById('returnForm').reset();
             document.getElementById('codeValidation').style.display = 'none';
 
-            // Reload return history
             await loadReturnHistory();
         } else {
             resultDiv.className = 'result-box error';
             resultDiv.innerHTML = `
-                <h3>✗ Return Failed</h3>
-                <p>${result.error || 'Failed to return book'}</p>
-                <p style="margin-top: 0.5rem;">Please check your borrow code and try again.</p>
+                <h3>✗ Trả Sách Thất Bại</h3>
+                <p>${result.error || 'Không thể trả sách'}</p>
+                <p style="margin-top: 0.5rem;">Vui lòng kiểm tra mã mượn và thử lại.</p>
             `;
         }
     } catch (error) {
-        console.error('Error returning book:', error);
+        console.error('Lỗi trả sách:', error);
         resultDiv.className = 'result-box error';
         resultDiv.innerHTML = `
-            <h3>✗ Error</h3>
-            <p>Error connecting to server. Please try again.</p>
+            <h3>✗ Lỗi</h3>
+            <p>Lỗi kết nối máy chủ. Vui lòng thử lại.</p>
         `;
     } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = '🔄 Return Book';
+        submitBtn.textContent = '🔄 Trả Sách';
     }
 }
 
-// Auto-format borrow code input (numbers only)
+// Tự động format mã mượn (chỉ số)
 document.getElementById('borrowCode')?.addEventListener('input', (e) => {
     e.target.value = e.target.value.replace(/\D/g, '');
 });

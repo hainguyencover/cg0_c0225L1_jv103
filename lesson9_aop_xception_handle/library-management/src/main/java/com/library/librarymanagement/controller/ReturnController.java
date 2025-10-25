@@ -24,7 +24,7 @@ import java.util.Map;
  * - POST /return - Trả sách bằng mã mượn
  * - GET /return?code=XXXXX - Kiểm tra thông tin trước khi trả (validation)
  */
-@WebServlet("/return")
+@WebServlet("/library-management/return")
 public class ReturnController extends HttpServlet {
     private BorrowService borrowService;
     private Gson gson;
@@ -176,7 +176,7 @@ public class ReturnController extends HttpServlet {
         result.put("data", record);
         result.put("borrowCode", borrowCode);
         result.put("bookTitle", record.getBookTitle());
-        result.put("borrowName", record.getBorrowName());
+        result.put("borrowerName", record.getBorrowerName());
         result.put("borrowDate", record.getBorrowDate());
         result.put("returnDate", record.getReturnDate());
         result.put("message", "Book '" + record.getBookTitle() + "' returned successfully. Thank you!");

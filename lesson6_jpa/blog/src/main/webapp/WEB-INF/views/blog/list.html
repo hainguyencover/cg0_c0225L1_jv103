@@ -11,15 +11,22 @@
 <body>
 <section layout:fragment="content">
     <div class="container mt-5">
+        <h2>Blog List</h2>
+
         <!-- Flash message -->
         <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
         <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Blog List</h2>
-            <a th:href="@{/blogs/create}" class="btn btn-success">+ Create New Blog</a>
+        <div class="mb-3 d-flex justify-content-between">
+            <form class="d-flex" th:action="@{/blogs}" method="get">
+                <input class="form-control me-2" type="text" name="keyword"
+                       placeholder="Tìm theo tên..." th:value="${keyword}">
+                <button class="btn btn-outline-success" type="submit">Tìm</button>
+            </form>
+            <div>
+                <a th:href="@{/blogs/create}" class="btn btn-success">+ Thêm mới Blog</a>
+                <a th:href="@{/}" class="btn btn-secondary">🏠 Trang chủ</a>
+            </div>
         </div>
-
         <table class="table table-bordered table-hover shadow-sm bg-white">
             <thead class="table-dark">
             <tr>

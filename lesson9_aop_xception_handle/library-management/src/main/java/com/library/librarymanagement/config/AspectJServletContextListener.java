@@ -14,13 +14,11 @@ public class AspectJServletContextListener implements ServletContextListener {
         System.out.println("=================================================");
 
         try {
-            // Initialize AOP Configuration
-            AopConfig.init();
+            // Initialize AOP Configuration (optional)
+            AopConfig.initialize();
 
-            System.out.println("[INIT] AOP Aspects initialized successfully");
-            System.out.println("[INIT] - BookActionLogAspect: ACTIVE");
-            System.out.println("[INIT] - VisitLogAspect: ACTIVE");
-            System.out.println("[INIT] - ErrorLogAspect: ACTIVE");
+            System.out.println("[INIT] AOP Configuration: OK (aspects optional)");
+            System.out.println("[INIT] Note: For full AOP logging, configure AspectJ LTW");
 
             // Test database connection
             testDatabaseConnection();
@@ -63,6 +61,7 @@ public class AspectJServletContextListener implements ServletContextListener {
         } catch (Exception e) {
             System.err.println("[ERROR] Database connection test: FAILED");
             System.err.println("[ERROR] " + e.getMessage());
+            System.err.println("[ERROR] Please check database.properties configuration");
         }
     }
 }

@@ -50,7 +50,7 @@ public class BookActionLogAspect {
     /**
      * Pointcut cho các method xóa sách trong BookService
      */
-    @Pointcut("execution(* com.library.librarymanagement.service.BookService.deleteBook(..))")
+    @Pointcut("execution(* com.library.service.BookService.deleteBook(..))")
     public void deleteBookPointcut() {
     }
 

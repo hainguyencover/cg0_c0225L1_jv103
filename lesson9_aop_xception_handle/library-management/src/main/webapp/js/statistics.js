@@ -24,26 +24,36 @@ async function loadHealthReport() {
             const data = result.data;
 
             let healthClass = 'excellent';
-            if (data.healthStatus.includes('Good')) healthClass = 'good';
-            else if (data.healthStatus.includes('Fair')) healthClass = 'fair';
-            else if (data.healthStatus.includes('Poor')) healthClass = 'poor';
+            let statusText = data.healthStatus;
+            if (statusText.includes('Good')) {
+                healthClass = 'good';
+                statusText = 'Tốt - Tỷ lệ sẵn có vừa phải';
+            } else if (statusText.includes('Excellent')) {
+                statusText = 'Xuất sắc - Tỷ lệ sẵn có cao';
+            } else if (statusText.includes('Fair')) {
+                healthClass = 'fair';
+                statusText = 'Khá - Tỷ lệ sẵn có thấp';
+            } else if (statusText.includes('Poor')) {
+                healthClass = 'poor';
+                statusText = 'Kém - Tỷ lệ sẵn có rất thấp';
+            }
 
             let html = `
                 <div class="health-status ${healthClass}">
-                    ${data.healthStatus}
+                    ${statusText}
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
                     <div>
-                        <strong>Total Book Titles:</strong> ${data.totalBookTitles}
+                        <strong>Tổng đầu sách:</strong> ${data.totalBookTitles}
                     </div>
                     <div>
-                        <strong>Total Copies:</strong> ${data.totalCopies}
+                        <strong>Tổng bản sao:</strong> ${data.totalCopies}
                     </div>
                     <div>
-                        <strong>Available:</strong> ${data.availableCopies}
+                        <strong>Còn lại:</strong> ${data.availableCopies}
                     </div>
                     <div>
-                        <strong>Availability Rate:</strong> ${data.availabilityRate}
+                        <strong>Tỷ lệ sẵn có:</strong> ${data.availabilityRate}
                     </div>
                 </div>
             `;
@@ -51,7 +61,7 @@ async function loadHealthReport() {
             if (data.booksNeedingRestock > 0) {
                 html += `
                     <div style="margin-top: 1rem; padding: 1rem; background: #fef3c7; border-radius: 4px;">
-                        <strong>⚠️ Books Needing Restock:</strong> ${data.booksNeedingRestock}
+                        <strong>⚠️ Sách cần nhập thêm:</strong> ${data.booksNeedingRestock}
                         <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
                             ${data.lowStockBooks.map(book => `<li>${book}</li>`).join('')}
                         </ul>
@@ -61,11 +71,11 @@ async function loadHealthReport() {
 
             reportDiv.innerHTML = html;
         } else {
-            showError('healthReport', 'Failed to load health report');
+            showError('healthReport', 'Không thể tải báo cáo');
         }
     } catch (error) {
-        console.error('Error loading health report:', error);
-        showError('healthReport', 'Error loading data');
+        console.error('Lỗi tải báo cáo:', error);
+        showError('healthReport', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -84,20 +94,20 @@ async function loadTopBooks() {
                         <div>
                             <div class="title">${index + 1}. ${book.title}</div>
                             <div style="font-size: 0.85rem; color: #6b7280;">
-                                by ${book.author} | ${book.category}
+                                của ${book.author} | ${book.category}
                             </div>
                         </div>
-                        <span class="badge">${book.borrowCount} borrows</span>
+                        <span class="badge">${book.borrowCount} lượt</span>
                     </div>
                 `;
             });
             listDiv.innerHTML = html;
         } else {
-            listDiv.innerHTML = '<p class="loading">No data available</p>';
+            listDiv.innerHTML = '<p class="loading">Không có dữ liệu</p>';
         }
     } catch (error) {
-        console.error('Error loading top books:', error);
-        showError('topBooks', 'Error loading data');
+        console.error('Lỗi tải sách:', error);
+        showError('topBooks', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -116,20 +126,20 @@ async function loadTopBorrowers() {
                         <div>
                             <div class="title">${index + 1}. ${borrower.borrowerName}</div>
                             <div style="font-size: 0.85rem; color: #6b7280;">
-                                Currently borrowing: ${borrower.currentBorrows}
+                                Đang mượn: ${borrower.currentBorrows}
                             </div>
                         </div>
-                        <span class="badge">${borrower.totalBorrows} total</span>
+                        <span class="badge">${borrower.totalBorrows} lượt</span>
                     </div>
                 `;
             });
             listDiv.innerHTML = html;
         } else {
-            listDiv.innerHTML = '<p class="loading">No data available</p>';
+            listDiv.innerHTML = '<p class="loading">Không có dữ liệu</p>';
         }
     } catch (error) {
-        console.error('Error loading top borrowers:', error);
-        showError('topBorrowers', 'Error loading data');
+        console.error('Lỗi tải người mượn:', error);
+        showError('topBorrowers', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -147,19 +157,19 @@ async function loadCategoryStats() {
                     <div class="category-card">
                         <h3>${category.category}</h3>
                         <div class="stat-row">
-                            <span>Total Titles:</span>
+                            <span>Tổng đầu sách:</span>
                             <strong>${category.totalTitles}</strong>
                         </div>
                         <div class="stat-row">
-                            <span>Total Copies:</span>
+                            <span>Tổng bản sao:</span>
                             <strong>${category.totalCopies}</strong>
                         </div>
                         <div class="stat-row">
-                            <span>Available:</span>
+                            <span>Còn lại:</span>
                             <strong style="color: var(--success-color);">${category.availableCopies}</strong>
                         </div>
                         <div class="stat-row">
-                            <span>Borrowed:</span>
+                            <span>Đang mượn:</span>
                             <strong style="color: var(--primary-color);">${category.borrowedCopies}</strong>
                         </div>
                     </div>
@@ -167,11 +177,11 @@ async function loadCategoryStats() {
             });
             statsDiv.innerHTML = html;
         } else {
-            statsDiv.innerHTML = '<p class="loading">No category data available</p>';
+            statsDiv.innerHTML = '<p class="loading">Không có dữ liệu thể loại</p>';
         }
     } catch (error) {
-        console.error('Error loading category stats:', error);
-        showError('categoryStats', 'Error loading data');
+        console.error('Lỗi tải thống kê thể loại:', error);
+        showError('categoryStats', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -189,10 +199,10 @@ async function loadLowStockBooks() {
                 html += `
                     <div class="book-card" style="border-left: 4px solid ${outOfStock ? 'var(--danger-color)' : 'var(--warning-color)'};">
                         <h3>${book.title}</h3>
-                        <p class="author">by ${book.author}</p>
-                        <span class="category">${book.category || 'Uncategorized'}</span>
+                        <p class="author">của ${book.author}</p>
+                        <span class="category">${book.category || 'Chưa phân loại'}</span>
                         <p class="availability ${outOfStock ? 'unavailable' : 'available'}">
-                            ${outOfStock ? '⚠️ Out of Stock' : '⚠️ Low Stock'}
+                            ${outOfStock ? '⚠️ Hết hàng' : '⚠️ Sắp hết'}
                             (${book.availableQuantity}/${book.totalQuantity})
                         </p>
                     </div>
@@ -200,11 +210,11 @@ async function loadLowStockBooks() {
             });
             booksDiv.innerHTML = html;
         } else {
-            booksDiv.innerHTML = '<p class="loading" style="color: var(--success-color);">✓ All books are well stocked!</p>';
+            booksDiv.innerHTML = '<p class="loading" style="color: var(--success-color);">✓ Tất cả sách đều còn đủ!</p>';
         }
     } catch (error) {
-        console.error('Error loading low stock books:', error);
-        showError('lowStockBooks', 'Error loading data');
+        console.error('Lỗi tải sách sắp hết:', error);
+        showError('lowStockBooks', 'Lỗi tải dữ liệu');
     }
 }
 
@@ -229,10 +239,10 @@ async function loadActivityStats() {
             }
             statsDiv.innerHTML = html;
         } else {
-            statsDiv.innerHTML = '<p class="loading">No activity data available</p>';
+            statsDiv.innerHTML = '<p class="loading">Không có dữ liệu hoạt động</p>';
         }
     } catch (error) {
-        console.error('Error loading activity stats:', error);
-        showError('activityStats', 'Error loading data');
+        console.error('Lỗi tải thống kê hoạt động:', error);
+        showError('activityStats', 'Lỗi tải dữ liệu');
     }
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Smartphone Manager</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<form id="add-smartphone">
+    <h1>Create New Smartphone</h1>
+    <label for="producer">Producer:</label>
+    <input type="text" id="producer" placeholder="e.g. Apple">
+
+    <label for="model">Model:</label>
+    <input type="text" id="model" placeholder="e.g. iPhone 15">
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" placeholder="e.g. 999">
+
+    <input type="submit" value="Add" onclick="addNewSmartPhone()">
+</form>
+
+<h1 id="title">📱 List of Smartphones</h1>
+
+<div id="div-btn">
+    <button onclick="successHandler()" id="display">📋 Display List</button>
+    <button onclick="displayFormCreate()" id="display-create">➕ Create New</button>
+</div>
+
+<div id="search-bar">
+    <input type="text" id="searchQuery" placeholder="🔍 Search by producer or model...">
+    <select id="sortBy">
+        <option value="id">Default</option>
+        <option value="producer">Producer</option>
+        <option value="model">Model</option>
+        <option value="price">Price</option>
+    </select>
+    <select id="direction">
+        <option value="asc">Asc</option>
+        <option value="desc">Desc</option>
+    </select>
+    <button onclick="searchSmartphones()">Search</button>
+</div>
+<div id="smartphoneList"></div>
+
+</body>
+</html>

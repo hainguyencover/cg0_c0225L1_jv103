@@ -28,7 +28,7 @@ import java.util.Map;
  * - GET /borrow?code=XXXXX - Kiểm tra thông tin mượn theo mã
  * - GET /borrow?bookId=X - Lịch sử mượn của một cuốn sách
  */
-@WebServlet("/borrow")
+@WebServlet("/library-management/borrow")
 public class BorrowController extends HttpServlet {
     private BorrowService borrowService;
     private Gson gson;

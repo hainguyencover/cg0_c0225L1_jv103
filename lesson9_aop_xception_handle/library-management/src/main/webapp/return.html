@@ -1,69 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Return Book - Library Management</title>
+  <title>Trả Sách - Quản Lý Thư Viện</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar">
   <div class="container">
-    <div class="nav-brand">📚 Library Management</div>
+    <div class="nav-brand">📚 Quản Lý Thư Viện</div>
     <ul class="nav-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="books.html">Books</a></li>
-      <li><a href="borrow.html">Borrow</a></li>
-      <li><a href="return.html" class="active">Return</a></li>
-      <li><a href="statistics.html">Statistics</a></li>
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="books.html">Danh Sách Sách</a></li>
+      <li><a href="borrow.html">Mượn Sách</a></li>
+      <li><a href="return.html" class="active">Trả Sách</a></li>
+      <li><a href="statistics.html">Thống Kê</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="container">
   <section class="page-header">
-    <h1>🔄 Return a Book</h1>
-    <p>Enter your 5-digit borrow code to return the book</p>
+    <h1>🔄 Trả Sách</h1>
+    <p>Nhập mã mượn 5 chữ số để trả sách</p>
   </section>
 
   <div class="two-column">
     <section class="form-section">
-      <h2>Return Form</h2>
+      <h2>Biểu Mẫu Trả Sách</h2>
       <form id="returnForm" onsubmit="handleReturn(event)">
         <div class="form-group">
-          <label for="borrowCode">Borrow Code (5 digits):</label>
+          <label for="borrowCode">Mã mượn (5 chữ số):</label>
           <input
                   type="text"
                   id="borrowCode"
-                  placeholder="e.g., 12345"
+                  placeholder="Ví dụ: 12345"
                   maxlength="5"
                   pattern="\d{5}"
                   required
           />
-          <small>Enter the 5-digit code you received when borrowing</small>
+          <small>Nhập mã 5 chữ số bạn nhận được khi mượn sách</small>
         </div>
 
         <button type="button" onclick="validateCode()" class="btn-secondary">
-          🔍 Check Code
+          🔍 Kiểm Tra Mã
         </button>
         <button type="submit" class="btn-primary">
-          🔄 Return Book
+          🔄 Trả Sách
         </button>
       </form>
 
       <div id="codeValidation" class="result-box" style="display: none;">
-        <!-- Validation result will be shown here -->
+        <!-- Kết quả kiểm tra sẽ hiển thị ở đây -->
       </div>
 
       <div id="returnResult" class="result-box" style="display: none;">
-        <!-- Return result will be shown here -->
+        <!-- Kết quả trả sách sẽ hiển thị ở đây -->
       </div>
     </section>
 
     <section class="list-section">
-      <h2>Return History (Recent)</h2>
+      <h2>Lịch Sử Trả Sách (Gần Đây)</h2>
       <div id="returnHistory" class="borrow-list">
-        <p class="loading">Loading return history...</p>
+        <p class="loading">Đang tải lịch sử...</p>
       </div>
     </section>
   </div>
@@ -71,7 +71,7 @@
 
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2025 Library Management System</p>
+    <p>&copy; 2025 Hệ Thống Quản Lý Thư Viện</p>
   </div>
 </footer>
 

@@ -1,104 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Management System</title>
+    <title>Hệ Thống Quản Lý Thư Viện</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar">
     <div class="container">
-        <div class="nav-brand">📚 Library Management</div>
+        <div class="nav-brand">📚 Quản Lý Thư Viện</div>
         <ul class="nav-menu">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="books.html">Books</a></li>
-            <li><a href="borrow.html">Borrow</a></li>
-            <li><a href="return.html">Return</a></li>
-            <li><a href="statistics.html">Statistics</a></li>
+            <li><a href="index.html" class="active">Trang Chủ</a></li>
+            <li><a href="books.html">Danh Sách Sách</a></li>
+            <li><a href="borrow.html">Mượn Sách</a></li>
+            <li><a href="return.html">Trả Sách</a></li>
+            <li><a href="statistics.html">Thống Kê</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
     <section class="hero">
-        <h1>Welcome to Library Management System</h1>
-        <p>Manage your library books with ease using AOP-powered logging</p>
+        <h1>Chào Mừng Đến Hệ Thống Quản Lý Thư Viện</h1>
+        <p>Quản lý sách thư viện dễ dàng với hệ thống ghi log tự động bằng AOP</p>
     </section>
 
     <section class="dashboard">
-        <h2>System Overview</h2>
+        <h2>Tổng Quan Hệ Thống</h2>
         <div class="stats-grid" id="statsGrid">
             <div class="stat-card">
                 <div class="stat-icon">📚</div>
                 <div class="stat-value" id="totalBooks">-</div>
-                <div class="stat-label">Total Books</div>
+                <div class="stat-label">Tổng Số Sách</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">✅</div>
                 <div class="stat-value" id="availableBooks">-</div>
-                <div class="stat-label">Available</div>
+                <div class="stat-label">Còn Lại</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">📖</div>
                 <div class="stat-value" id="borrowedBooks">-</div>
-                <div class="stat-label">Borrowed</div>
+                <div class="stat-label">Đang Mượn</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">👥</div>
                 <div class="stat-value" id="totalBorrows">-</div>
-                <div class="stat-label">Total Borrows</div>
+                <div class="stat-label">Lượt Mượn</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">🔄</div>
                 <div class="stat-value" id="currentBorrows">-</div>
-                <div class="stat-label">Current Borrows</div>
+                <div class="stat-label">Đang Mượn</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon">👁️</div>
                 <div class="stat-value" id="totalVisits">-</div>
-                <div class="stat-label">Total Visits</div>
+                <div class="stat-label">Lượt Truy Cập</div>
             </div>
         </div>
     </section>
 
     <section class="quick-actions">
-        <h2>Quick Actions</h2>
+        <h2>Chức Năng Chính</h2>
         <div class="action-grid">
             <a href="books.html" class="action-card">
                 <div class="action-icon">📚</div>
-                <h3>Browse Books</h3>
-                <p>View all available books</p>
+                <h3>Xem Sách</h3>
+                <p>Xem tất cả sách có sẵn</p>
             </a>
             <a href="borrow.html" class="action-card">
                 <div class="action-icon">📖</div>
-                <h3>Borrow Book</h3>
-                <p>Borrow a book from library</p>
+                <h3>Mượn Sách</h3>
+                <p>Mượn sách từ thư viện</p>
             </a>
             <a href="return.html" class="action-card">
                 <div class="action-icon">🔄</div>
-                <h3>Return Book</h3>
-                <p>Return your borrowed book</p>
+                <h3>Trả Sách</h3>
+                <p>Trả sách đã mượn</p>
             </a>
             <a href="statistics.html" class="action-card">
                 <div class="action-icon">📊</div>
-                <h3>Statistics</h3>
-                <p>View library statistics</p>
+                <h3>Thống Kê</h3>
+                <p>Xem thống kê thư viện</p>
             </a>
         </div>
     </section>
 
     <section class="recent-activity">
-        <h2>Recent Activity</h2>
+        <h2>Hoạt Động Gần Đây</h2>
         <div class="activity-list" id="recentActivity">
-            <p class="loading">Loading recent activity...</p>
+            <p class="loading">Đang tải hoạt động gần đây...</p>
         </div>
     </section>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2025 Library Management System | Built with Java EE 8, AOP & Gradle</p>
+        <p>&copy; 2025 Hệ Thống Quản Lý Thư Viện | Xây dựng với Java EE 8, AOP & Gradle</p>
     </div>
 </footer>
 

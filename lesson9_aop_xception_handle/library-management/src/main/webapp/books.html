@@ -1,67 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books - Library Management</title>
+    <title>Danh Sách Sách - Quản Lý Thư Viện</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar">
     <div class="container">
-        <div class="nav-brand">📚 Library Management</div>
+        <div class="nav-brand">📚 Quản Lý Thư Viện</div>
         <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="books.html" class="active">Books</a></li>
-            <li><a href="borrow.html">Borrow</a></li>
-            <li><a href="return.html">Return</a></li>
-            <li><a href="statistics.html">Statistics</a></li>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="books.html" class="active">Danh Sách Sách</a></li>
+            <li><a href="borrow.html">Mượn Sách</a></li>
+            <li><a href="return.html">Trả Sách</a></li>
+            <li><a href="statistics.html">Thống Kê</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
     <section class="page-header">
-        <h1>📚 Library Books</h1>
-        <p>Browse and search available books</p>
+        <h1>📚 Danh Sách Sách Thư Viện</h1>
+        <p>Duyệt xem và tìm kiếm sách có sẵn</p>
     </section>
 
     <section class="filters">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search books by title..." />
-            <button onclick="searchBooks()">🔍 Search</button>
+            <input type="text" id="searchInput" placeholder="Tìm kiếm sách theo tên..." />
+            <button onclick="searchBooks()">🔍 Tìm Kiếm</button>
         </div>
         <div class="filter-box">
-            <label for="categoryFilter">Filter by Category:</label>
+            <label for="categoryFilter">Lọc theo thể loại:</label>
             <select id="categoryFilter" onchange="filterByCategory()">
-                <option value="">All Categories</option>
+                <option value="">Tất cả thể loại</option>
             </select>
         </div>
-        <button onclick="loadAllBooks()" class="btn-secondary">Show All</button>
+        <button onclick="loadAllBooks()" class="btn-secondary">Hiện Tất Cả</button>
     </section>
 
     <section class="books-section">
-        <h2>Available Books (<span id="bookCount">0</span>)</h2>
+        <h2>Sách Có Sẵn (<span id="bookCount">0</span>)</h2>
         <div id="booksList" class="books-grid">
-            <p class="loading">Loading books...</p>
+            <p class="loading">Đang tải danh sách sách...</p>
         </div>
     </section>
 </div>
 
-<!-- Book Detail Modal -->
+<!-- Modal Chi Tiết Sách -->
 <div id="bookModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h2 id="modalTitle">Book Details</h2>
+        <h2 id="modalTitle">Chi Tiết Sách</h2>
         <div id="modalBody">
-            <!-- Content will be inserted here -->
+            <!-- Nội dung sẽ được chèn vào đây -->
         </div>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2025 Library Management System</p>
+        <p>&copy; 2025 Hệ Thống Quản Lý Thư Viện</p>
     </div>
 </footer>
 

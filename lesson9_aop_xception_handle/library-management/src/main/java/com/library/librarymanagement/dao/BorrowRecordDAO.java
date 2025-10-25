@@ -148,7 +148,7 @@ public class BorrowRecordDAO {
 
             stmt.setString(1, record.getBorrowCode());
             stmt.setInt(2, record.getBookId());
-            stmt.setString(3, record.getBorrowName());
+            stmt.setString(3, record.getBorrowerName());
             stmt.setString(4, record.getStatus());
 
             int affectedRows = stmt.executeUpdate();
@@ -251,7 +251,7 @@ public class BorrowRecordDAO {
         record.setBorrowId(rs.getLong("borrow_id"));
         record.setBorrowCode(rs.getString("borrow_code"));
         record.setBookId(rs.getInt("book_id"));
-        record.setBorrowName(rs.getString("borrow_name"));
+        record.setBorrowerName(rs.getString("borrower_name"));
         record.setBorrowDate(rs.getTimestamp("borrow_date"));
         record.setReturnDate(rs.getTimestamp("return_date"));
         record.setStatus(rs.getString("status"));

@@ -1,66 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrow Book - Library Management</title>
+    <title>Mượn Sách - Quản Lý Thư Viện</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar">
     <div class="container">
-        <div class="nav-brand">📚 Library Management</div>
+        <div class="nav-brand">📚 Quản Lý Thư Viện</div>
         <ul class="nav-menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="books.html">Books</a></li>
-            <li><a href="borrow.html" class="active">Borrow</a></li>
-            <li><a href="return.html">Return</a></li>
-            <li><a href="statistics.html">Statistics</a></li>
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="books.html">Danh Sách Sách</a></li>
+            <li><a href="borrow.html" class="active">Mượn Sách</a></li>
+            <li><a href="return.html">Trả Sách</a></li>
+            <li><a href="statistics.html">Thống Kê</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
     <section class="page-header">
-        <h1>📖 Borrow a Book</h1>
-        <p>Select a book and enter your name to borrow</p>
+        <h1>📖 Mượn Sách</h1>
+        <p>Chọn sách và nhập tên của bạn để mượn</p>
     </section>
 
     <div class="two-column">
         <section class="form-section">
-            <h2>Borrow Form</h2>
+            <h2>Biểu Mẫu Mượn Sách</h2>
             <form id="borrowForm" onsubmit="handleBorrow(event)">
                 <div class="form-group">
-                    <label for="bookSelect">Select Book:</label>
+                    <label for="bookSelect">Chọn sách:</label>
                     <select id="bookSelect" required>
-                        <option value="">-- Select a book --</option>
+                        <option value="">-- Chọn một cuốn sách --</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="borrowerName">Your Name:</label>
-                    <input type="text" id="borrowerName" placeholder="Enter your full name" required />
+                    <label for="borrowerName">Tên của bạn:</label>
+                    <input type="text" id="borrowerName" placeholder="Nhập họ tên đầy đủ" required />
                 </div>
 
                 <div id="bookInfo" class="book-info" style="display: none;">
-                    <h3>Selected Book:</h3>
-                    <p><strong>Title:</strong> <span id="selectedTitle"></span></p>
-                    <p><strong>Author:</strong> <span id="selectedAuthor"></span></p>
-                    <p><strong>Available:</strong> <span id="selectedAvailable"></span> copies</p>
+                    <h3>Sách đã chọn:</h3>
+                    <p><strong>Tên sách:</strong> <span id="selectedTitle"></span></p>
+                    <p><strong>Tác giả:</strong> <span id="selectedAuthor"></span></p>
+                    <p><strong>Còn lại:</strong> <span id="selectedAvailable"></span> cuốn</p>
                 </div>
 
-                <button type="submit" class="btn-primary">📖 Borrow Book</button>
+                <button type="submit" class="btn-primary">📖 Mượn Sách</button>
             </form>
 
             <div id="borrowResult" class="result-box" style="display: none;">
-                <!-- Result will be shown here -->
+                <!-- Kết quả sẽ hiển thị ở đây -->
             </div>
         </section>
 
         <section class="list-section">
-            <h2>Currently Borrowed Books</h2>
+            <h2>Sách Đang Được Mượn</h2>
             <div id="currentBorrows" class="borrow-list">
-                <p class="loading">Loading borrowed books...</p>
+                <p class="loading">Đang tải danh sách...</p>
             </div>
         </section>
     </div>
@@ -68,7 +68,7 @@
 
 <footer class="footer">
     <div class="container">
-        <p>&copy; 2025 Library Management System</p>
+        <p>&copy; 2025 Hệ Thống Quản Lý Thư Viện</p>
     </div>
 </footer>
 

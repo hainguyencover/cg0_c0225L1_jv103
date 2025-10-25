@@ -29,7 +29,7 @@ import java.util.Map;
  * - POST /books?action=update - Cập nhật sách
  * - POST /books?action=delete&id=X - Xóa sách
  */
-@WebServlet("/books")
+@WebServlet("/library-management/books")
 public class BookController extends HttpServlet {
     private BookService bookService;
     private Gson gson;

@@ -27,7 +27,7 @@ import java.util.Map;
  * - GET /statistics?action=health - Library health report
  * - GET /statistics?action=lowStock - Sách sắp hết
  */
-@WebServlet("/statistics")
+@WebServlet("/library-management/statistics")
 public class StatisticsController extends HttpServlet {
     private StatisticsService statisticsService;
     private Gson gson;

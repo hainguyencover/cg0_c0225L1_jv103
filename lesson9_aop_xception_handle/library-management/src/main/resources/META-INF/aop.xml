@@ -17,7 +17,7 @@
         <include within="com.library.librarymanagement..*"/>
 
         <!-- Exclude các class không cần weave (tùy chọn) -->
-        <!-- <exclude within="com.library.config..*"/> -->
-        <!-- <exclude within="com.library.entity..*"/> -->
+         <exclude within="com.library.librarymanagement.config..*"/>
+         <exclude within="com.library.librarymanagement.entity..*"/>
     </weaver>
 </aspectj>

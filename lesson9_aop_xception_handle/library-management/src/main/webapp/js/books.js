@@ -1,4 +1,47 @@
-let allBooks = [];
+async function showBookDetails(bookId) {
+    try {
+        const result = await API.getBookById(bookId);
+
+        if (result.success) {
+            const book = result.data;
+            const logs = result.logs || [];
+
+            let html = `
+                <div class="book-details">
+                    <h3>${book.title}</h3>
+                    <p><strong>Tác giả:</strong> ${book.author}</p>
+                    <p><strong>Thể loại:</strong> ${book.category || 'Không có'}</p>
+                    <p><strong>Tổng số:</strong> ${book.totalQuantity}</p>
+                    <p><strong>Còn lại:</strong> ${book.availableQuantity}</p>
+                    <p><strong>Ngày tạo:</strong> ${formatDate(book.createdAt)}</p>
+                    <p><strong>Cập nhật:</strong> ${formatDate(book.updatedAt)}</p>
+                </div>
+            `;
+
+            if (logs.length > 0) {
+                html += '<h3>Lịch Sử Thao Tác</h3><div class="log-list">';
+                logs.forEach(log => {
+                    html += `
+                        <div class="log-item">
+                            <strong>${log.action}</strong> - 
+                            ${log.changeAmount > 0 ? '+' : ''}${log.changeAmount} 
+                            (${log.beforeQuantity} → ${log.afterQuantity}) 
+                            bởi ${log.actor} 
+                            vào ${formatDate(log.timestamp)}
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            document.getElementById('modalBody').innerHTML = html;
+            document.getElementById('bookModal').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Lỗi tải chi tiết sách:', error);
+        alert('Lỗi tải chi tiết sách');
+    }
+}let allBooks = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
     await loadAllBooks();
@@ -46,7 +89,7 @@ function displayBooks(books) {
     const booksDiv = document.getElementById('booksList');
 
     if (books.length === 0) {
-        booksDiv.innerHTML = '<p class="loading">No books found</p>';
+        booksDiv.innerHTML = '<p class="loading">Không tìm thấy sách nào</p>';
         return;
     }
 
@@ -56,10 +99,10 @@ function displayBooks(books) {
         html += `
             <div class="book-card" onclick="showBookDetails(${book.bookId})">
                 <h3>${book.title}</h3>
-                <p class="author">by ${book.author}</p>
-                <span class="category">${book.category || 'Uncategorized'}</span>
+                <p class="author">của ${book.author}</p>
+                <span class="category">${book.category || 'Chưa phân loại'}</span>
                 <p class="availability ${available ? 'available' : 'unavailable'}">
-                    ${available ? '✓ Available' : '✗ Not Available'} 
+                    ${available ? '✓ Còn sách' : '✗ Hết sách'} 
                     (${book.availableQuantity}/${book.totalQuantity})
                 </p>
             </div>
@@ -74,7 +117,7 @@ async function searchBooks() {
     const keyword = document.getElementById('searchInput').value.trim();
 
     if (!keyword) {
-        alert('Please enter a search keyword');
+        alert('Vui lòng nhập từ khóa tìm kiếm');
         return;
     }
 
@@ -86,11 +129,11 @@ async function searchBooks() {
         if (result.success) {
             displayBooks(result.data);
         } else {
-            showError('booksList', 'Search failed');
+            showError('booksList', 'Tìm kiếm thất bại');
         }
     } catch (error) {
-        console.error('Error searching books:', error);
-        showError('booksList', 'Error performing search');
+        console.error('Lỗi tìm kiếm:', error);
+        showError('booksList', 'Lỗi thực hiện tìm kiếm');
     }
 }
 

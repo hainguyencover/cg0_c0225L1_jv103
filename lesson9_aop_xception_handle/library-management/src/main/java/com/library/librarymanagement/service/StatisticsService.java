@@ -153,7 +153,7 @@ public class StatisticsService {
         // Đếm số lần mượn theo người
         Map<String, Long> borrowerCounts = allRecords.stream()
                 .collect(Collectors.groupingBy(
-                        BorrowRecord::getBorrowName,
+                        BorrowRecord::getBorrowerName,
                         Collectors.counting()
                 ));
 
@@ -161,12 +161,12 @@ public class StatisticsService {
 
         for (Map.Entry<String, Long> entry : borrowerCounts.entrySet()) {
             Map<String, Object> borrowerStats = new HashMap<>();
-            borrowerStats.put("borrowName", entry.getKey());
+            borrowerStats.put("borrowerName", entry.getKey());
             borrowerStats.put("totalBorrows", entry.getValue());
 
             // Đếm số sách đang mượn
             long currentBorrows = allRecords.stream()
-                    .filter(r -> r.getBorrowName().equals(entry.getKey()) &&
+                    .filter(r -> r.getBorrowerName().equals(entry.getKey()) &&
                             "BORROWED".equals(r.getStatus()))
                     .count();
             borrowerStats.put("currentBorrows", currentBorrows);
