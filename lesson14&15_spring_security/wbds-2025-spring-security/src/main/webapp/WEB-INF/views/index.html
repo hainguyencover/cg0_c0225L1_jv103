@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Security Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h3 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .user-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .login-options {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .nav-links {
+            background: #d4edda;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🔐 Spring Security Example</h2>
+
+    <h3>Welcome!</h3>
+
+    <div sec:authorize="isAuthenticated()" class="user-info">
+        <strong>Đã đăng nhập:</strong> <span sec:authentication="principal.username"></span>
+    </div>
+
+    <div sec:authorize="isAnonymous()" class="login-options">
+        <strong>Vui lòng đăng nhập:</strong><br><br>
+        <a th:href="@{/user}">👤 Đăng nhập User</a>
+        <a th:href="@{/admin}">👨‍💼 Đăng nhập Admin</a>
+    </div>
+
+    <div sec:authorize="isAuthenticated()" class="nav-links">
+        <div sec:authorize="hasRole('USER')">
+            <a th:href="@{/user}">👤 Trang User</a>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin}">👨‍💼 Trang Admin</a>
+        </div>
+        <a th:href="@{/logout}">🚪 Đăng xuất</a>
+    </div>
+</div>
+</body>
+</html>

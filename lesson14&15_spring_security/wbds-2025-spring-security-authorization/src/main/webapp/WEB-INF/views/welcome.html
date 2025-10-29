@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - User Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; max-width: 500px; width: 90%; }
+        h1 { color: #333; margin-bottom: 1.5rem; font-size: 1.8rem; }
+        .user-name { color: #667eea; font-weight: bold; }
+        .nav-links { margin-top: 2rem; }
+        .nav-links a { display: inline-block; padding: 10px 20px; margin: 0 10px; background: #667eea; color: white; text-decoration: none; border-radius: 25px; transition: all 0.3s ease; }
+        .nav-links a:hover { background: #5a6fd8; transform: translateY(-2px); }
+        .welcome-icon { font-size: 3rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="welcome-icon">🏠</div>
+    <h1>Welcome <span class="user-name" th:text="${user}"></span>!</h1>
+    <p>You have successfully logged into the User Dashboard</p>
+    <div class="nav-links" sec:authorize="isAuthenticated()">
+        <a th:href="@{/}">🏠 Home</a>
+        <a th:href="@{/logout}">🚪 Logout</a>
+    </div>
+</div>
+</body>
+</html>
