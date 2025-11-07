@@ -4,5 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lesson16_automated_testing/wbds-2025-customer-basic-test" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/lesson16_automated_testing/wbds-2025-customer-management-testing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lesson17&amp;18_spring_boot/customer-management" vcs="Git" />
   </component>
 </project>
