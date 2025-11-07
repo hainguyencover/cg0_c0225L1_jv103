@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 700px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        .top-link {
+            display: block;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(0,0,0,0.05);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #ecf0f1;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .action-link {
+            font-size: 18px;
+            transition: transform 0.2s;
+        }
+        .edit-icon {
+            color: #2980b9;
+        }
+        .delete-icon {
+            color: #c0392b;
+        }
+        .action-link:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="top-link">
+        <a href="/customers/create">+ Create New Customer</a>
+    </div>
+    <h1>Customers</h1>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Actions</th>
+        </tr>
+        <th:block th:each="customer : ${customers}">
+            <tr>
+                <td th:text="${customer.firstName}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td>
+                    <div class="actions">
+                        <a th:href="@{/customers/update/__${customer.id}__}" class="action-link edit-icon" title="Edit">✏️</a>
+                        <a th:href="@{/customers/delete/__${customer.id}__}" class="action-link delete-icon" title="Delete">🗑️</a>
+                    </div>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</div>
+</body>
+</html>

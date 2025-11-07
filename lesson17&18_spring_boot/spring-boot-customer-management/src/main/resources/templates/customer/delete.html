@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Customer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fefefe;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            color: #333;
+        }
+        .container {
+            width: 600px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #c0392b;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        table {
+            background: #fff3f3;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        td {
+            padding: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 16px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        .top-link {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Delete Customer</h1>
+    <h2>Are you sure?</h2>
+    <div class="top-link">
+        <a href="/customers">← Back to Customer List</a>
+    </div>
+    <form th:action="@{/customers/delete}" th:object="${customer}" method="post">
+        <input type="hidden" name="id" th:field="*{id}">
+        <table>
+            <tr>
+                <td>First name:</td>
+                <td th:text="${customer.firstName}"></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td th:text="${customer.lastName}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Delete Customer"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

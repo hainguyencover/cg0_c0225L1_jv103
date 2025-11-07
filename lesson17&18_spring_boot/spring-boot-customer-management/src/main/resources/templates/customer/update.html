@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Customer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            color: #333;
+        }
+        .container {
+            width: 600px;
+        }
+        h1 {
+            color: #2980b9;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+        table {
+            background: #fff;
+            width: 100%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        td {
+            padding: 10px;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 6px 10px;
+            width: 100%;
+        }
+        input[type="submit"] {
+            background: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .top-link {
+            text-align: right;
+            margin-bottom: 10px;
+        }
+        .message {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Update Customer</h1>
+    <div class="top-link">
+        <a href="/customers">← Back to Customer List</a>
+    </div>
+    <th:block th:if="${message}">
+        <p class="message" th:text="${message}"></p>
+    </th:block>
+    <form th:action="@{/customers/update}" th:object="${customer}" method="post">
+        <input type="hidden" name="id" th:field="*{id}">
+        <table>
+            <tr>
+                <td>First name:</td>
+                <td><input type="text" th:field="*{firstName}"/></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input type="text" th:field="*{lastName}"/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update Customer"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
